@@ -3,3 +3,6 @@
 ### 1. python3.11 
 ### 2. scrapy2.11.2
 ### 3. scrapy-redis0.7.3 
+## 使用
+### 新建一个爬虫
+ scrapy genspider cwcwclothingSpider cwcwclothing.com
