@@ -4,7 +4,10 @@ import scrapy
 class BaiduspiderSpider(scrapy.Spider):
     name = "baiduSpider"
     allowed_domains = ["baidu.com"]
-    start_urls = ["https://baidu.com"]
+    start_urls = ["https://www.baidu.com"]
 
     def parse(self, response):
-        pass
+        
+        self.logger.info("=====================")
+        self.logger.info(response.text)
+        self.logger.info("--------------------")
