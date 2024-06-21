@@ -16,4 +16,12 @@ pip uninstall package
 C:\Users\*\AppData\Roaming\Python\Python311\site-packages\package
 3. 重新安装
 pip3 install package
+## 部署scrapy
+### 使用geray部署
+#### 安装gerapy
+### 使用dcoker部署
+### 使用k8s部署
+
+
+
 

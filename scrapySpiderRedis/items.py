@@ -7,7 +7,6 @@ import scrapy
 
 class ScrapyspiderredisItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
     table="cwcwclothing"
     link=scrapy.Field()
     title=scrapy.Field()
