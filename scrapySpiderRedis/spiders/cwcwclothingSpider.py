@@ -7,8 +7,8 @@ import re
 import time
 import requests
 from scrapySpiderRedis.log import Logging
-from scrapy.spidermiddlewares.httperror import HttpError
-from twisted.internet.error import DNSLookupError, TimeoutError, TCPTimedOutError
+# from scrapy.spidermiddlewares.httperror import HttpError
+# from twisted.internet.error import DNSLookupError, TimeoutError, TCPTimedOutError
 # dont_filter=True 表示不走重新爬取流程
 
 class CwcwclothingspiderSpider(scrapy.Spider):
@@ -152,8 +152,7 @@ class CwcwclothingspiderSpider(scrapy.Spider):
             self.logger.info(f"{data_url}")
             self.logger.info(requests.get(url=data_url).status_code)
             yield Request(url=data_url,callback=self.parse_data_list,meta=response.meta)
-            
-      
+             
     def parse_data_list(self,response):
         """_summary_
         解析详情页
