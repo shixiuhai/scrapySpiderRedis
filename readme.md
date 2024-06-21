@@ -40,10 +40,8 @@ gerapy migrate # 对数据库进行初始化
 gerapy initadmin # 生成一个用户名和密码都是admin的管理员账号
 gerapy createsuperuser # 如果不想创建admin的账号，运行该命令后，输入用户名和密码
 gerapy runserver 0.0.0.0:8000 启动gerapy服务,访问http://host:8000
-
-
 ```
-* 
+
 ### 使用dcoker部署
 ### 使用k8s部署
 
