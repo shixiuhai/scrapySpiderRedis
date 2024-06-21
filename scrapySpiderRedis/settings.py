@@ -112,7 +112,8 @@ SCHEDULER_FLUSH_ON_START = True # False表示不重新爬取,True表示会重新
 
 # 日志相关配置
 LOG_LEVEL = 'INFO' # 日志级别
-SAVE_LOGS = True  # 保存自定义日志到文件
+SAVE_LOGS = False  # 保存自定义日志到文件
+LOG_ENABLED = True # 是否开启scrapy自己的日志,Ture开启,False关闭
 
 # 是否禁用 cookies false 禁用，true不禁用
 COOKIES_ENABLED = True
