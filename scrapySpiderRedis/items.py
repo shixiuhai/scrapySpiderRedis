@@ -6,6 +6,12 @@
 import scrapy
 
 class ScrapyspiderredisItem(scrapy.Item):
+    """_summary_
+    table 是表名
+    =左边的字段就是mysql里表的字段,默认是intiCode里cwcwclothingSpider表
+    Args:
+        scrapy (_type_): _description_
+    """
     # define the fields for your item here like:
     table="cwcwclothing"
     link=scrapy.Field()
