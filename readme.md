@@ -6,3 +6,6 @@
 ## 使用
 ### 新建一个爬虫
  scrapy genspider cwcwclothingSpider cwcwclothing.com
+## 其他
+### 有个弃用告警
+目录在 site-packages\scrapy_redis\dupefilter.py

@@ -1,19 +1,8 @@
 import logging
-from loguru import logger
+import coloredlogs
+from scrapy.logformatter import LogFormatter
 
-# 添加 InterceptHandler() 类
-class InterceptHandler(logging.Handler):
-    def emit(self, record):
-        # ✓ corresponding Loguru level if it exists
-        try:
-            level = logger.level(record.levelname).name
-        except ValueError:
-            level = record.levelno
-
-        # Find caller from where originated the logged message
-        frame, depth = logging.currentframe(), 2
-        while frame.f_code.co_filename == logging.__file__:
-            frame = frame.f_back
-            depth += 1
-
-        logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
+class ColorLogFormatter(LogFormatter):
+    def format(self, record):
+        coloredlogs.install(level='DEBUG', fmt='%(levelname)s: %(message)s', logger=logging.getLogger())
+        return super().format(record)

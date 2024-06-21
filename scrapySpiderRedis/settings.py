@@ -100,49 +100,19 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor" #  �
 FEED_EXPORT_ENCODING = "utf-8" #  确保数据以 UTF-8 格式编码。
 
 # 开启scrapy-redis支持
-DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter" # 配置去重类为redis
+DUPEFILTER_CLASS = "scrapySpiderRedis.dupefilter.CustomRFPDupeFilter" # 配置去重类为redis
 SCHEDULER = "scrapy_redis.scheduler.Scheduler" # 配置调度器为redis
 
-# 配置redis主机密码相关
-REDIS_URL = 'redis://:abc123456@127.0.0.1:6379'
+REDIS_URL = 'redis://:abc123456@127.0.0.1:6379' # 配置redis主机密码相关
 
 # 配置数据持久化
-SCHEDULER_PERSIST = True # Ture表示爬虫爬取完成后不会清空爬取队列和去重指纹集合
+SCHEDULER_PERSIST = True # 中间断层数据不会丢失，会继续重新爬取
 # 是否开启重新爬取
 SCHEDULER_FLUSH_ON_START = True # False表示不重新爬取,True表示会重新爬取
 
 # 降低log等级
-LOG_LEVEL = 'INFO'
-# import logging
-# from loguru import logger
-# # 添加 InterceptHandler() 类
-# class InterceptHandler(logging.Handler):
-#     def emit(self, record):
-#         # Mapping Loguru level to corresponding color
-#         level_colors = {
-#             logging.INFO: "<green>",
-#             logging.WARNING: "<blue>",
-#             logging.ERROR: "<red>",
-#             logging.CRITICAL: "<red>",
-#         }
-#         try:
-#             # Determine Loguru level name or use level number if not found
-#             level = logger.level(record.levelname).name
-#         except ValueError:
-#             level = record.levelno
-#         # Set log message color based on log level
-#         log_color = level_colors.get(record.levelno, "<default>")
-#         # Find caller from where originated the logged message
-#         frame, depth = logging.currentframe(), 2
-#         while frame.f_code.co_filename == logging.__file__:
-#             frame = frame.f_back
-#             depth += 1
-#         # Log using Loguru with specified color
-#         logger.opt(depth=depth, exception=record.exc_info).log(level, f"{log_color}{record.getMessage()}")
-# # 使用 InterceptHandler() 类
-# logging.basicConfig(handlers=[InterceptHandler()], level=0)
-# # 添加
-# logger.add("quotes_{time}.log", level="ERROR", rotation="10 MB")
+LOG_LEVEL = 'DEBUG'
+# LOG_FORMATTER = 'scrapySpiderRedis.color_log_formatter.ColorLogFormatter'
 
 
 # 是否禁用 cookies false 禁用，true不禁用
@@ -178,6 +148,8 @@ RETRY_HTTP_CODES = [500, 502, 503, 504, 408]
 # 重定向
 REDIRECT_ENABLED = True
 
+DEPTH_LIMIT = 0 # 配置爬取深度  0表示不限制
+
 # 启用爬取 “Ajax 页面爬取”
 AJAXCRAWL_ENABLED = True
 
@@ -199,6 +171,7 @@ MYSQL_PORT = 3306
 ITEM_PIPELINES = {
    'scrapySpiderRedis.pipelines.MysqlPipeline': 300,
 }
+
 
 
 
