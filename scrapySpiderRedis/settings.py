@@ -143,16 +143,19 @@ CONCURRENT_REQUESTS = 100
 REACTOR_THREADPOOL_MAXSIZE = 30
 
 #重试代码
-RETRY_HTTP_CODES = [500, 502, 503, 504, 408]
+RETRY_HTTP_CODES = [401, 403, 408, 500, 502, 503, 504] # 该优先级高于HTTPERROR_ALLOWED_CODES
+
+# 允许走正常回调函数的code
+HTTPERROR_ALLOWED_CODES = [304] # HTTPERROR_ALLOWED_CODES是一个设置，用于定义在爬取过程中哪些HTTP错误代码是被允许的，即在哪些情况下不会触发默认的错误处理逻辑而是继续处理页面。
 
 # 重定向
-REDIRECT_ENABLED = True
+REDIRECT_ENABLED = False # True表示可以重定向，False表示不重定向
 
 # 配置爬取深度
 DEPTH_LIMIT = 0 # 配置爬取路径深度0表示不限制
 
 # 启用爬取 “Ajax 页面爬取”
-AJAXCRAWL_ENABLED = True
+AJAXCRAWL_ENABLED = False
 
 # 延迟配置
 DOWNLOAD_DELAY = 3  # 设置每个请求之间的延时为3秒
@@ -173,6 +176,12 @@ MYSQL_PORT = 3306
 ITEM_PIPELINES = {
    'scrapySpiderRedis.pipelines.MysqlPipeline': 300,
 }
+
+# 下载中间件配置,配置接入三方请求,配置代理等,配置随机请求头等
+DOWNLOADER_MIDDLEWARES = {
+   "scrapySpiderRedis.middlewares.ScrapyspiderredisDownloaderMiddleware": 543,
+}
+
 
 
 

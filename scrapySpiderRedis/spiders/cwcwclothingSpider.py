@@ -5,6 +5,7 @@ import scrapy
 from bs4 import BeautifulSoup
 import re
 import time
+import requests
 from scrapySpiderRedis.log import Logging
 from scrapy.spidermiddlewares.httperror import HttpError
 from twisted.internet.error import DNSLookupError, TimeoutError, TCPTimedOutError
@@ -123,7 +124,7 @@ class CwcwclothingspiderSpider(scrapy.Spider):
         href_value = soup.find_all('a', class_='mobile-nav__sublist-link', href=True)
         sort_list = ["https://cwcwclothing.com" + href["href"] for href in href_value]
         for sort_link in sort_list:
-            yield Request(url=sort_link,headers=headers,cookies=cookies,callback=self.parse_data_links)
+            yield Request(url=sort_link,headers=headers,cookies=cookies,callback=self.parse_data_links,meta={"sort_url":sort_link})
         
     def parse_data_links(self,response):
         """_summary_
@@ -154,23 +155,10 @@ class CwcwclothingspiderSpider(scrapy.Spider):
         }
 
         headers = {
-            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-            'accept-language': 'zh-CN,zh;q=0.9',
-            'cache-control': 'max-age=0',
-            # 'cookie': 'secure_customer_sig=; localization=GB; cart_currency=GBP; _tracking_consent=%7B%22con%22%3A%7B%22CMP%22%3A%7B%22a%22%3A%22%22%2C%22m%22%3A%22%22%2C%22p%22%3A%22%22%2C%22s%22%3A%22%22%7D%7D%2C%22v%22%3A%222.1%22%2C%22region%22%3A%22USCA%22%2C%22reg%22%3A%22%22%7D; _cmp_a=%7B%22purposes%22%3A%7B%22a%22%3Atrue%2C%22p%22%3Atrue%2C%22m%22%3Atrue%2C%22t%22%3Atrue%7D%2C%22display_banner%22%3Afalse%2C%22sale_of_data_region%22%3Afalse%7D; _shopify_y=91372618-7d5f-48e6-bd90-79597608435c; _orig_referrer=; _landing_page=%2Fcollections%2Feribe%2Fproducts%2Feribe-alpine-short-merino-cardigan-vintage-pink; receive-cookie-deprecation=1; _fbp=fb.1.1718901416916.667174697195911382; _gcl_au=1.1.1560594023.1718901417; _ga=GA1.1.1066773551.1718901418; qab_previous_pathname=/collections/eribe/products/eribe-alpine-short-merino-cardigan-vintage-pink; _shopify_s=3e798e4d-d05d-4fd0-809c-12d122f24808; _shopify_sa_t=2024-06-20T17%3A48%3A15.452Z; _shopify_sa_p=; keep_alive=13c1b72d-ee53-4bff-8617-98357d168b21; shopify_pay_redirect=pending; _ga_1E2PJH8WR2=GS1.1.1718905696.2.0.1718905696.0.0.0',
-            'if-none-match': '"cacheable:8283af845166e5a925b8cb45be7d1072"',
-            'priority': 'u=0, i',
-            'sec-ch-ua': '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-cookie-deprecation': 'label_only_2',
-            'sec-fetch-dest': 'document',
-            'sec-fetch-mode': 'navigate',
-            'sec-fetch-site': 'none',
-            'sec-fetch-user': '?1',
-            'upgrade-insecure-requests': '1',
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+            # Other headers
         }
+
         soup = BeautifulSoup(response.text, 'html.parser')
         href_value = soup.find_all('a', class_='grid-view-item__link grid-view-item__image-container full-width-link', href=True)
         data_list = ["https://cwcwclothing.com" + href["href"] for href in href_value ]
@@ -178,7 +166,11 @@ class CwcwclothingspiderSpider(scrapy.Spider):
         self.logger.info(f"==================解析meta地址是{response.meta}==================")
         for data_url in data_list:
             self.logger.info(f"{data_url}")
-            yield Request(url=data_url,headers=headers,cookies=cookies,callback=self.parse_data_list,errback=self.handle_httperror)
+            self.logger.info(requests.get(url=data_url).status_code)
+            try:
+                yield Request(url=data_url,callback=self.parse_data_list,meta={"a":1})
+            except Exception as error:
+                self.logger.error(f"错误是:{error}")
       
     def parse_data_list(self,response):
         """_summary_
@@ -187,10 +179,10 @@ class CwcwclothingspiderSpider(scrapy.Spider):
             response (_type_): _description_
         """
         self.logger.info("++++++++++++++++++++++++++++++++++")
-        self.logger.info(response.text)
+        self.logger.info(response.text[0:10])
         self.logger.info("++++++++++++++++++++++++++++++++++")
         
-        # return
+        return
         # item = ScrapyspiderredisItem() # 实例化一个数据库对象
         # resp=response.text
         # self.logger.info(f"详情页内容是{resp[0:20]}")
