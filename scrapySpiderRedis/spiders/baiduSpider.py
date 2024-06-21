@@ -1,18 +1,15 @@
 import scrapy
 # from scrapy_redis.spiders import RedisSpider
 from scrapySpiderRedis.items import ScrapyspiderredisItem
-
+from scrapySpiderRedis.log import Logging
 
 class BaiduspiderSpider(scrapy.Spider):
     name = "baiduSpider"
     allowed_domains = ["baidu.com","bing.com"]
     start_urls = ["https://www.baidu.com","https://www.bing.com"]
-
+    logger = Logging("cwcwclothingSpider.log").get_logger() # 使用自定义日志器
     def parse(self, response):
-        # response.text 
-        self.logger.info("=====================")
-        # self.logger.info(response.text)
-        self.logger.info("--------------------")
+        self.logger.info(response.text)
         # yield scrapy.Request("https://www.baidu.com", callback=self.parse)
         # yield {
         #     'url': response.url,
