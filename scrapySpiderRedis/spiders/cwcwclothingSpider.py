@@ -60,22 +60,6 @@ class CwcwclothingspiderSpider(scrapy.Spider):
         }   
         # yield Request(url=self.sort_link_url,headers=headers,cookies=cookies,callback=self.parse_sort_links,meta={'source_list': response.url})
         yield Request(url=self.sort_link_url,headers=headers,cookies=cookies,callback=self.parse_sort_links,dont_filter=True) # dont_filter=True表示该域名不走过滤器
-         
-    def handle_httperror(self, failure):
-        self.logger.error(failure)
-        # 处理HTTP错误的回调函数
-        if failure.check(HttpError):
-            response = failure.value.response
-            self.logger.error(f'HttpError on {response.url}')
-            # 这里可以进一步处理HTTP错误的情况
-        elif failure.check(DNSLookupError):
-            request = failure.request
-            self.logger.error(f'DNSLookupError on {request.url}')
-            # 这里可以处理DNS查找错误的情况
-        elif failure.check(TimeoutError, TCPTimedOutError):
-            request = failure.request
-            self.logger.error(f'TimeoutError on {request.url}')
-            # 这里可以处理超时错误的情况
           
     def parse_sort_links(self,response):
         """_summary_
@@ -85,21 +69,21 @@ class CwcwclothingspiderSpider(scrapy.Spider):
         """
         # sort_list=response.meta['source_url']
         cookies = {
-        'secure_customer_sig': '',
-        'localization': 'GB',
-        'cart_currency': 'GBP',
-        '_tracking_consent': '%7B%22con%22%3A%7B%22CMP%22%3A%7B%22a%22%3A%22%22%2C%22m%22%3A%22%22%2C%22p%22%3A%22%22%2C%22s%22%3A%22%22%7D%7D%2C%22v%22%3A%222.1%22%2C%22region%22%3A%22CNZJ%22%2C%22reg%22%3A%22%22%7D',
-        '_cmp_a': '%7B%22purposes%22%3A%7B%22a%22%3Atrue%2C%22p%22%3Atrue%2C%22m%22%3Atrue%2C%22t%22%3Atrue%7D%2C%22display_banner%22%3Afalse%2C%22sale_of_data_region%22%3Afalse%7D',
-        '_shopify_y': 'b8b7e79a-b3fb-4527-9044-57a7f0f3f85a',
-        '_orig_referrer': '',
-        '_landing_page': '%2Fcollections%2Fgrace-mila',
-        'receive-cookie-deprecation': '1',
-        '_shopify_sa_p': '',
-        'shopify_pay_redirect': 'pending',
-        'keep_alive': '46a6144f-0309-4250-ad19-3c663805aee6',
-        '_shopify_s': '809968be-f34a-4228-a097-12d0d52d5d3f',
-        '_shopify_sa_t': '2024-06-20T12%3A13%3A50.106Z',
-        'qab_previous_pathname': '/collections/coats/products/nice-things-waterproof-hooded-trench-coat-dark-yellow',
+            'secure_customer_sig': '',
+            'localization': 'GB',
+            'cart_currency': 'GBP',
+            '_tracking_consent': '%7B%22con%22%3A%7B%22CMP%22%3A%7B%22a%22%3A%22%22%2C%22m%22%3A%22%22%2C%22p%22%3A%22%22%2C%22s%22%3A%22%22%7D%7D%2C%22v%22%3A%222.1%22%2C%22region%22%3A%22CNZJ%22%2C%22reg%22%3A%22%22%7D',
+            '_cmp_a': '%7B%22purposes%22%3A%7B%22a%22%3Atrue%2C%22p%22%3Atrue%2C%22m%22%3Atrue%2C%22t%22%3Atrue%7D%2C%22display_banner%22%3Afalse%2C%22sale_of_data_region%22%3Afalse%7D',
+            '_shopify_y': 'b8b7e79a-b3fb-4527-9044-57a7f0f3f85a',
+            '_orig_referrer': '',
+            '_landing_page': '%2Fcollections%2Fgrace-mila',
+            'receive-cookie-deprecation': '1',
+            '_shopify_sa_p': '',
+            'shopify_pay_redirect': 'pending',
+            'keep_alive': '46a6144f-0309-4250-ad19-3c663805aee6',
+            '_shopify_s': '809968be-f34a-4228-a097-12d0d52d5d3f',
+            '_shopify_sa_t': '2024-06-20T12%3A13%3A50.106Z',
+            'qab_previous_pathname': '/collections/coats/products/nice-things-waterproof-hooded-trench-coat-dark-yellow',
         }
 
         headers = {
@@ -123,7 +107,7 @@ class CwcwclothingspiderSpider(scrapy.Spider):
         soup = BeautifulSoup(response.text, 'html.parser')
         href_value = soup.find_all('a', class_='mobile-nav__sublist-link', href=True)
         sort_list = ["https://cwcwclothing.com" + href["href"] for href in href_value]
-        for sort_link in sort_list:
+        for sort_link in sort_list[0:1]:
             yield Request(url=sort_link,headers=headers,cookies=cookies,callback=self.parse_data_links,meta={"sort_url":sort_link})
         
     def parse_data_links(self,response):
@@ -164,13 +148,11 @@ class CwcwclothingspiderSpider(scrapy.Spider):
         data_list = ["https://cwcwclothing.com" + href["href"] for href in href_value ]
         self.logger.info(f"==================解析详情页页地址是{data_list[0:3]}==================")
         self.logger.info(f"==================解析meta地址是{response.meta}==================")
-        for data_url in data_list:
+        for data_url in data_list[0:1]:
             self.logger.info(f"{data_url}")
             self.logger.info(requests.get(url=data_url).status_code)
-            try:
-                yield Request(url=data_url,callback=self.parse_data_list,meta={"a":1},dont_filter=True)
-            except Exception as error:
-                self.logger.error(f"错误是:{error}")
+            yield Request(url=data_url,callback=self.parse_data_list,meta=response.meta)
+            
       
     def parse_data_list(self,response):
         """_summary_
@@ -181,12 +163,12 @@ class CwcwclothingspiderSpider(scrapy.Spider):
         self.logger.info("++++++++++++++++++++++++++++++++++")
         self.logger.info(response.text[0:10])
         self.logger.info("++++++++++++++++++++++++++++++++++")
-        
-        return
-        # item = ScrapyspiderredisItem() # 实例化一个数据库对象
-        # resp=response.text
-        # self.logger.info(f"详情页内容是{resp[0:20]}")
-        # self.logger.info(f"meta内容是{response.meta}")
+        item = ScrapyspiderredisItem() # 实例化一个数据库对象
+        resp=response.text
+        self.logger.info(f"详情页内容是{resp[0:20]}")
+        self.logger.info(f"meta内容是{response.meta}")
+        item["title"]=response.meta.get("sort_url")
+        yield item
         # title = re.search(r'<meta property="og:title" content="(.*?)">', resp).group().split('"')[-2]
         # price = re.search(r'<meta property="og:price:amount" content="(.*?)">', resp).group().split('"')[-2]
         # sort = response.meta["sort_url"].split("/")[-1]
