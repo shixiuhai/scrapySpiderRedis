@@ -110,10 +110,9 @@ SCHEDULER_PERSIST = True # 中间断层数据不会丢失，会继续重新爬�
 # 是否开启重新爬取
 SCHEDULER_FLUSH_ON_START = True # False表示不重新爬取,True表示会重新爬取
 
-# 降低log等级
-LOG_LEVEL = 'DEBUG'
-# LOG_FORMATTER = 'scrapySpiderRedis.color_log_formatter.ColorLogFormatter'
-
+# 日志相关配置
+LOG_LEVEL = 'INFO' # 日志级别
+SAVE_LOGS = True  # 保存自定义日志到文件
 
 # 是否禁用 cookies false 禁用，true不禁用
 COOKIES_ENABLED = True
@@ -127,8 +126,8 @@ RETRY_ENABLED = True
 #重试次数 
 RETRY_TIMES = 2
 
-#超时  
-DOWNLOAD_TIMEOUT = 5
+# 请求超时配置
+DOWNLOAD_TIMEOUT = 10
 
 # 针对某一个域名的爬取线程数设置
 CONCURRENT_REQUESTS_PER_DOMAIN = 1
@@ -148,13 +147,13 @@ RETRY_HTTP_CODES = [500, 502, 503, 504, 408]
 # 重定向
 REDIRECT_ENABLED = True
 
+# 配置爬取圣都
 DEPTH_LIMIT = 0 # 配置爬取深度  0表示不限制
 
 # 启用爬取 “Ajax 页面爬取”
 AJAXCRAWL_ENABLED = True
 
 DOWNLOAD_DELAY = 4  # 设置每个请求之间的延时为3秒
-
 
 # 设置mysql相关
 MYSQL_HOST = '192.168.6.246'

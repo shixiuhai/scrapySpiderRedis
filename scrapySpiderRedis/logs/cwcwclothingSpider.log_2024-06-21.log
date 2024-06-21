@@ -1,0 +1,116 @@
+2024-06-21 19:17:23,952 - cwcwclothingSpider.py -> parse_data_links - line:173 - INFO: ==================解析详情页页地址是['https://cwcwclothing.com/collections/coats/products/nice-things-waterproof-hooded-trench-coat-dark-yellow', 'https://cwcwclothing.com/collections/coats/products/seasalt-cloudburst-mac-tomato', 'https://cwcwclothing.com/collections/coats/products/part-two-emmy-raincoat-dark-navy']==================
+2024-06-21 19:17:23,955 - cwcwclothingSpider.py -> parse_data_links - line:174 - INFO: ==================解析meta地址是{'depth': 1, 'download_timeout': 10.0, 'download_slot': '198.18.0.58', 'download_latency': 0.5249953269958496}==================
+2024-06-21 19:17:23,957 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/nice-things-waterproof-hooded-trench-coat-dark-yellow
+2024-06-21 19:17:23,962 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/seasalt-cloudburst-mac-tomato
+2024-06-21 19:17:23,965 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/part-two-emmy-raincoat-dark-navy
+2024-06-21 19:17:23,968 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/nice-things-double-fabric-checked-coat-brown
+2024-06-21 19:17:23,970 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/ichi-bunala-down-waistcoat-winter-moss
+2024-06-21 19:17:23,982 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/ichi-hazo-teddy-coat-cadmium-green
+2024-06-21 19:17:23,986 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/ichi-gezora-explorer-poncho-black
+2024-06-21 19:17:23,988 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/ichi-bunala-down-padded-jacket-dark-navy
+2024-06-21 19:17:23,991 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/rino-pelle-bowie-reversible-shower-mac-olive-birch
+2024-06-21 19:17:24,003 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/seasalt-cloudburst-mac-in-fathom
+2024-06-21 19:17:27,649 - cwcwclothingSpider.py -> parse_data_links - line:173 - INFO: ==================解析详情页页地址是['https://cwcwclothing.com/collections/bags/products/biba-turkana-crochet-bag-taupe', 'https://cwcwclothing.com/collections/bags/products/biba-kasba-jute-shoulder-bag-calabaza', 'https://cwcwclothing.com/collections/bags/products/biba-bristow-br14-hielo']==================
+2024-06-21 19:17:27,651 - cwcwclothingSpider.py -> parse_data_links - line:174 - INFO: ==================解析meta地址是{'depth': 1, 'download_timeout': 10.0, 'download_slot': '198.18.0.58', 'download_latency': 0.4302530288696289}==================
+2024-06-21 19:17:27,652 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-turkana-crochet-bag-taupe
+2024-06-21 19:17:27,656 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-kasba-jute-shoulder-bag-calabaza
+2024-06-21 19:17:27,658 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-bristow-br14-hielo
+2024-06-21 19:17:27,661 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/somerville-large-woven-beach-bag-electric-blue
+2024-06-21 19:17:27,663 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/somerville-large-woven-jacquard-beach-bag-yellow
+2024-06-21 19:17:27,675 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/somerville-large-woven-jacquard-beach-bag-cream-navy
+2024-06-21 19:17:27,677 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/ichi-pearli-bag-caribou
+2024-06-21 19:17:27,681 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/ichi-cabli-string-bag-coral-rose
+2024-06-21 19:17:27,683 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/ichi-edith-shopper-love-potion
+2024-06-21 19:17:27,685 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/ichi-brommie
+2024-06-21 19:17:27,699 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/ichi-rububi-striped-shoulder-basket-coral-rose
+2024-06-21 19:17:27,702 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/nice-things-eco-leather-plaited-strap-gondola-bag-navy
+2024-06-21 19:17:27,704 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/nice-things-granada-chambray-fabric-bagyellow
+2024-06-21 19:17:27,706 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-lovington-metallic-studded-bag-raspberry
+2024-06-21 19:17:27,728 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-lovington-4wallet-tan
+2024-06-21 19:17:27,730 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-lovington-4-wallet-black
+2024-06-21 19:17:32,163 - cwcwclothingSpider.py -> parse_data_links - line:173 - INFO: ==================解析详情页页地址是['https://cwcwclothing.com/collections/tops/products/part-two-grit-sleeveless-print-top-black-small-graphic', 'https://cwcwclothing.com/collections/tops/products/selected-femme-bellis-s-s-boat-neck-tee-white', 'https://cwcwclothing.com/collections/tops/products/ichi-crissy-satin-v-neck-blouse-coral-rose']==================
+2024-06-21 19:17:32,165 - cwcwclothingSpider.py -> parse_data_links - line:174 - INFO: ==================解析meta地址是{'depth': 1, 'download_timeout': 10.0, 'download_slot': '198.18.0.58', 'download_latency': 0.4944772720336914}==================
+2024-06-21 19:17:32,167 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/part-two-grit-sleeveless-print-top-black-small-graphic
+2024-06-21 19:17:32,172 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/selected-femme-bellis-s-s-boat-neck-tee-white
+2024-06-21 19:17:32,174 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/ichi-crissy-satin-v-neck-blouse-coral-rose
+2024-06-21 19:17:32,177 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/ichi-ossi-multi-heart-print-t-shirt-cloud-dancer
+2024-06-21 19:17:32,179 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/bibico-joss-jersey-cardigan-navy-stripe
+2024-06-21 19:17:32,190 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/bibico-pippa-batik-print-sun-top-terracotta
+2024-06-21 19:17:32,192 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/great-plains-atol-broderie-anglaise-long-sleeve-top-tropical-green
+2024-06-21 19:17:32,194 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/great-plains-ladder-detail-sleeve-top-white
+2024-06-21 19:17:32,196 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/grace-and-mila-memory-ruffle-detail-blouse-white
+2024-06-21 19:17:32,199 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/grace-and-mila-magique-scallop-cuff-v-top-ecru
+2024-06-21 19:17:32,213 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/grace-and-mila-manuel-lurex-jacquard-edged-v-neck-marino
+2024-06-21 19:17:32,215 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/grace-and-mila-madame-reversible-neck-top-rayure
+2024-06-21 19:17:32,218 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/grace-and-mila-madame-reversible-neck-top-ecru-gold
+2024-06-21 19:17:32,221 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/grace-and-mila-malice-scallop-v-back-top-vert
+2024-06-21 19:17:32,223 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/grace-and-mila-malin-metallic-top-soft-gold
+2024-06-21 19:17:32,235 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/tops/products/grace-and-mila-manuel-lurex-jacquard-edged-v-neck-cinammon-rose
+2024-06-21 19:17:35,030 - cwcwclothingSpider.py -> parse_data_links - line:173 - INFO: ==================解析详情页页地址是['https://cwcwclothing.com/collections/knits/products/part-two-gunette-sleeveless-knitted-top-windsurfer', 'https://cwcwclothing.com/collections/knits/products/part-two-guldborg-short-sleeve-cardigan-windsurfer', 'https://cwcwclothing.com/collections/knits/products/part-two-glennie-short-sleeve-striped-knit-mandarin-red']==================
+2024-06-21 19:17:35,032 - cwcwclothingSpider.py -> parse_data_links - line:174 - INFO: ==================解析meta地址是{'depth': 1, 'download_timeout': 10.0, 'download_slot': '198.18.0.58', 'download_latency': 0.4192371368408203}==================
+2024-06-21 19:17:35,034 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/part-two-gunette-sleeveless-knitted-top-windsurfer
+2024-06-21 19:17:35,038 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/part-two-guldborg-short-sleeve-cardigan-windsurfer
+2024-06-21 19:17:35,040 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/part-two-glennie-short-sleeve-striped-knit-mandarin-red
+2024-06-21 19:17:35,042 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/nice-things-bees-jacquard-sweater-navy
+2024-06-21 19:17:35,045 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/seasalt-castle-beach-stripe-cardigan-porthole-maritime-chalk
+2024-06-21 19:17:35,047 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/seasalt-doe-path-vest-cordial
+2024-06-21 19:17:35,054 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/seasalt-vanessa-cardigan-reflection
+2024-06-21 19:17:35,056 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/bibico-alba-polo-neck-cardigan-shirt-indigo
+2024-06-21 19:17:35,058 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/eribe-alpine-short-merino-wool-sweater-moss
+2024-06-21 19:17:35,061 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/grace-and-mila-macy-apple-intarsia-sweater-soft-orange
+2024-06-21 19:17:35,064 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/grace-and-mila-maddox-liberte-embroidered-sweater-ecru-pink
+2024-06-21 19:17:35,067 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/yerse-soft-cotton-stripe-knit-sky-blue-ecru
+2024-06-21 19:17:35,070 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/yerse-pointelle-cotton-knit-ecru
+2024-06-21 19:17:35,072 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/skatie-lace-up-front-striped-knit-navy-ecru
+2024-06-21 19:17:35,074 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/eribe-alpine-short-merino-sweater-aurora
+2024-06-21 19:17:35,077 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/knits/products/eribe-alpine-short-merino-cardigan-figaro
+2024-06-21 19:17:39,968 - cwcwclothingSpider.py -> parse_data_links - line:173 - INFO: ==================解析详情页页地址是[]==================
+2024-06-21 19:17:39,969 - cwcwclothingSpider.py -> parse_data_links - line:174 - INFO: ==================解析meta地址是{'depth': 1, 'download_timeout': 10.0, 'download_slot': '198.18.0.58', 'download_latency': 0.3521697521209717}==================
+2024-06-21 19:17:44,547 - cwcwclothingSpider.py -> parse_data_links - line:173 - INFO: ==================解析详情页页地址是['https://cwcwclothing.com/collections/shirts/products/bonte-manon-ric-rac-trim-shirt-chalk-blue', 'https://cwcwclothing.com/collections/shirts/products/ichi-ezemo-striped-jacquard-palace-blue', 'https://cwcwclothing.com/collections/shirts/products/seasalt-larissa-shirt-helford-birds-ocean-drift']==================
+2024-06-21 19:17:44,549 - cwcwclothingSpider.py -> parse_data_links - line:174 - INFO: ==================解析meta地址是{'depth': 1, 'download_timeout': 10.0, 'download_slot': '198.18.0.58', 'download_latency': 0.46903443336486816}==================
+2024-06-21 19:17:44,550 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/bonte-manon-ric-rac-trim-shirt-chalk-blue
+2024-06-21 19:17:44,553 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/ichi-ezemo-striped-jacquard-palace-blue
+2024-06-21 19:17:44,555 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/seasalt-larissa-shirt-helford-birds-ocean-drift
+2024-06-21 19:17:44,557 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/seasalt-larissa-shirt-anemone-vintage-chalk
+2024-06-21 19:17:44,559 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/seasalt-larissa-shirt-campion-field-dill
+2024-06-21 19:17:44,562 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/ichi-emmeretta-tie-dye-shirt-mixed-blues
+2024-06-21 19:17:44,565 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/ichi-ravenna-seersucker-oversized-shirt-calypso-coral
+2024-06-21 19:17:44,567 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/chico-soleil-embroidered-heart-blouse-violine
+2024-06-21 19:17:44,569 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/frnch-carla-cubist-print-overshirt-geo-blue
+2024-06-21 19:17:44,571 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/nice-things-leaves-crinkle-print-blouse-navy
+2024-06-21 19:17:44,573 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/nice-things-seagrass-print-blouse-black
+2024-06-21 19:17:44,576 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/nice-things-blanket-flower-print-crinkle-blouse-yellow
+2024-06-21 19:17:44,578 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/handprint-dream-apparel-bristol-shirt-blue-sketch
+2024-06-21 19:17:44,581 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/part-two-cindie-linen-summer-shirt-mandarin-red
+2024-06-21 19:17:44,583 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/part-two-gertha-linen-shirt-windsurfer-stripe
+2024-06-21 19:17:44,585 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/shirts/products/bonte-feline-scallop-detail-voile-blouse-white-ink
+2024-06-21 19:18:06,372 - cwcwclothingSpider.py -> parse_data_links - line:173 - INFO: ==================解析详情页页地址是['https://cwcwclothing.com/collections/coats/products/nice-things-waterproof-hooded-trench-coat-dark-yellow', 'https://cwcwclothing.com/collections/coats/products/seasalt-cloudburst-mac-tomato', 'https://cwcwclothing.com/collections/coats/products/part-two-emmy-raincoat-dark-navy']==================
+2024-06-21 19:18:06,375 - cwcwclothingSpider.py -> parse_data_links - line:174 - INFO: ==================解析meta地址是{'depth': 1, 'download_timeout': 10.0, 'download_slot': '198.18.0.58', 'download_latency': 0.3349926471710205}==================
+2024-06-21 19:18:06,376 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/nice-things-waterproof-hooded-trench-coat-dark-yellow
+2024-06-21 19:18:06,381 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/seasalt-cloudburst-mac-tomato
+2024-06-21 19:18:06,383 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/part-two-emmy-raincoat-dark-navy
+2024-06-21 19:18:06,386 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/nice-things-double-fabric-checked-coat-brown
+2024-06-21 19:18:06,388 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/ichi-bunala-down-waistcoat-winter-moss
+2024-06-21 19:18:06,391 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/ichi-hazo-teddy-coat-cadmium-green
+2024-06-21 19:18:06,403 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/ichi-gezora-explorer-poncho-black
+2024-06-21 19:18:06,406 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/ichi-bunala-down-padded-jacket-dark-navy
+2024-06-21 19:18:06,408 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/rino-pelle-bowie-reversible-shower-mac-olive-birch
+2024-06-21 19:18:06,410 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/coats/products/seasalt-cloudburst-mac-in-fathom
+2024-06-21 19:18:12,187 - cwcwclothingSpider.py -> parse_data_links - line:173 - INFO: ==================解析详情页页地址是['https://cwcwclothing.com/collections/bags/products/biba-turkana-crochet-bag-taupe', 'https://cwcwclothing.com/collections/bags/products/biba-kasba-jute-shoulder-bag-calabaza', 'https://cwcwclothing.com/collections/bags/products/biba-bristow-br14-hielo']==================
+2024-06-21 19:18:12,189 - cwcwclothingSpider.py -> parse_data_links - line:174 - INFO: ==================解析meta地址是{'depth': 1, 'download_timeout': 10.0, 'download_slot': '198.18.0.58', 'download_latency': 0.29857540130615234}==================
+2024-06-21 19:18:12,190 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-turkana-crochet-bag-taupe
+2024-06-21 19:18:12,195 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-kasba-jute-shoulder-bag-calabaza
+2024-06-21 19:18:12,197 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-bristow-br14-hielo
+2024-06-21 19:18:12,199 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/somerville-large-woven-beach-bag-electric-blue
+2024-06-21 19:18:12,201 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/somerville-large-woven-jacquard-beach-bag-yellow
+2024-06-21 19:18:12,203 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/somerville-large-woven-jacquard-beach-bag-cream-navy
+2024-06-21 19:18:12,217 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/ichi-pearli-bag-caribou
+2024-06-21 19:18:12,219 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/ichi-cabli-string-bag-coral-rose
+2024-06-21 19:18:12,221 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/ichi-edith-shopper-love-potion
+2024-06-21 19:18:12,223 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/ichi-brommie
+2024-06-21 19:18:12,225 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/ichi-rububi-striped-shoulder-basket-coral-rose
+2024-06-21 19:18:12,240 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/nice-things-eco-leather-plaited-strap-gondola-bag-navy
+2024-06-21 19:18:12,242 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/nice-things-granada-chambray-fabric-bagyellow
+2024-06-21 19:18:12,245 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-lovington-metallic-studded-bag-raspberry
+2024-06-21 19:18:12,247 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-lovington-4wallet-tan
+2024-06-21 19:18:12,249 - cwcwclothingSpider.py -> parse_data_links - line:177 - INFO: https://cwcwclothing.com/collections/bags/products/biba-lovington-4-wallet-black

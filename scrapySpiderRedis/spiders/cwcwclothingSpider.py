@@ -5,14 +5,15 @@ import scrapy
 from bs4 import BeautifulSoup
 import re
 import time
+from scrapySpiderRedis.log import Logging
 
 class CwcwclothingspiderSpider(scrapy.Spider):
     name = "cwcwclothingSpider"
-    allowed_domains = ["cwcwclothing.com"]
+    allowed_domains = ["cwcwclothing.com","baidu.com"]
     # start_urls = ["https://cwcwclothing.com"]
     sort_link_url="https://cwcwclothing.com/collections/grace-mila"
     
-
+    logger = Logging("cwcwclothingSpider.log").get_logger()
     # def parse(self, response):
     #     """_summary_
     #     程序开始
@@ -173,7 +174,8 @@ class CwcwclothingspiderSpider(scrapy.Spider):
         self.logger.info(f"==================解析meta地址是{response.meta}==================")
         # return data_list
         for data_url in data_list:
-            yield Request(url=data_url,headers=headers,cookies=cookies,callback=self.parse_data_list)
+            self.logger.info(f"{data_url}")
+            yield Request(url=data_url,headers=headers,cookies=cookies,callback=self.parse_data_list,dont_filter=True)
         
     def parse_data_list(self,response):
         """_summary_
