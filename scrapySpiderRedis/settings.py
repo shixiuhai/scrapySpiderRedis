@@ -118,9 +118,6 @@ LOG_ENABLED = True # 是否开启scrapy自己的日志,Ture开启,False关闭
 # 是否禁用 cookies false 禁用，true不禁用
 COOKIES_ENABLED = True
 
-# 禁用重试
-# RETRY_ENABLED = False
-
 # 是否打开重试开关
 RETRY_ENABLED = True 
 
@@ -148,13 +145,15 @@ RETRY_HTTP_CODES = [500, 502, 503, 504, 408]
 # 重定向
 REDIRECT_ENABLED = True
 
-# 配置爬取圣都
-DEPTH_LIMIT = 0 # 配置爬取深度  0表示不限制
+# 配置爬取深度
+DEPTH_LIMIT = 0 # 配置爬取路径深度0表示不限制
 
 # 启用爬取 “Ajax 页面爬取”
 AJAXCRAWL_ENABLED = True
 
-DOWNLOAD_DELAY = 4  # 设置每个请求之间的延时为3秒
+# 延迟配置
+DOWNLOAD_DELAY = 3  # 设置每个请求之间的延时为3秒
+RANDOMIZE_DOWNLOAD_DELAY = False # 启用随机延迟 如果你设置DOWNLOAD_DELAY为3秒，并且RANDOMIZE_DOWNLOAD_DELAY为True，那么实际的下载延迟时间将在1.5秒（3 * 0.5）到4.5秒（3 * 1.5）之间随机选取。
 
 # 设置mysql相关
 MYSQL_HOST = '192.168.6.246'
