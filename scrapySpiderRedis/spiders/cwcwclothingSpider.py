@@ -13,14 +13,8 @@ class CwcwclothingspiderSpider(scrapy.Spider):
     # start_urls = ["https://cwcwclothing.com"]
     sort_link_url="https://cwcwclothing.com/collections/grace-mila"
     
-    logger = Logging("cwcwclothingSpider.log").get_logger()
-    # def parse(self, response):
-    #     """_summary_
-    #     程序开始
-    #     Args:
-    #         response (_type_): _description_
-    #     """
-    #     pass
+    logger = Logging("cwcwclothingSpider.log").get_logger() # 使用自定义日志器
+   
     def start_requests(self) -> Iterable[Request]:
         """_summary_
         爬虫开始
