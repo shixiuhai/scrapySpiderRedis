@@ -138,7 +138,7 @@ RANDOMIZE_DOWNLOAD_DELAY = False # 启用随机延迟 如果你设置DOWNLOAD_DE
 MYSQL_HOST = '192.168.6.246' # mysql数据库地址
 MYSQL_DATABASE = 'video' # mysql数据库库名
 MYSQL_USER = 'root' # mysql数据库用户铭
-MYSQL_PASSWORD = 'xxxxxx' # 数据库用户密码
+MYSQL_PASSWORD = 'sxh.20008' # 数据库用户密码
 MYSQL_PORT = 3306 # 数据库连接端口
 
 # pipeline 数据存储设置
