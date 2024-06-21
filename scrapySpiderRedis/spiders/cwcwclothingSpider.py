@@ -6,15 +6,16 @@ from bs4 import BeautifulSoup
 import re
 import time
 from scrapySpiderRedis.log import Logging
+from scrapy.spidermiddlewares.httperror import HttpError
+from twisted.internet.error import DNSLookupError, TimeoutError, TCPTimedOutError
+# dont_filter=True 表示不走重新爬取流程
 
 class CwcwclothingspiderSpider(scrapy.Spider):
     name = "cwcwclothingSpider"
     allowed_domains = ["cwcwclothing.com","baidu.com"]
     # start_urls = ["https://cwcwclothing.com"]
     sort_link_url="https://cwcwclothing.com/collections/grace-mila"
-    
     logger = Logging("cwcwclothingSpider.log").get_logger() # 使用自定义日志器
-   
     def start_requests(self) -> Iterable[Request]:
         """_summary_
         爬虫开始
@@ -57,9 +58,24 @@ class CwcwclothingspiderSpider(scrapy.Spider):
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
         }   
         # yield Request(url=self.sort_link_url,headers=headers,cookies=cookies,callback=self.parse_sort_links,meta={'source_list': response.url})
-        
         yield Request(url=self.sort_link_url,headers=headers,cookies=cookies,callback=self.parse_sort_links,dont_filter=True) # dont_filter=True表示该域名不走过滤器
-           
+         
+    def handle_httperror(self, failure):
+        self.logger.error(failure)
+        # 处理HTTP错误的回调函数
+        if failure.check(HttpError):
+            response = failure.value.response
+            self.logger.error(f'HttpError on {response.url}')
+            # 这里可以进一步处理HTTP错误的情况
+        elif failure.check(DNSLookupError):
+            request = failure.request
+            self.logger.error(f'DNSLookupError on {request.url}')
+            # 这里可以处理DNS查找错误的情况
+        elif failure.check(TimeoutError, TCPTimedOutError):
+            request = failure.request
+            self.logger.error(f'TimeoutError on {request.url}')
+            # 这里可以处理超时错误的情况
+          
     def parse_sort_links(self,response):
         """_summary_
         解析 列表页链接
@@ -103,13 +119,9 @@ class CwcwclothingspiderSpider(scrapy.Spider):
             'upgrade-insecure-requests': '1',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
         }
-   
-        # self.logger.info("=====================")
         soup = BeautifulSoup(response.text, 'html.parser')
         href_value = soup.find_all('a', class_='mobile-nav__sublist-link', href=True)
         sort_list = ["https://cwcwclothing.com" + href["href"] for href in href_value]
-        # self.logger.info(sort_list)
-        # self.logger.info("=====================")
         for sort_link in sort_list:
             yield Request(url=sort_link,headers=headers,cookies=cookies,callback=self.parse_data_links)
         
@@ -162,15 +174,12 @@ class CwcwclothingspiderSpider(scrapy.Spider):
         soup = BeautifulSoup(response.text, 'html.parser')
         href_value = soup.find_all('a', class_='grid-view-item__link grid-view-item__image-container full-width-link', href=True)
         data_list = ["https://cwcwclothing.com" + href["href"] for href in href_value ]
-        # for href in href_value:
-        #     data_list.append("https://cwcwclothing.com" + href["href"])
         self.logger.info(f"==================解析详情页页地址是{data_list[0:3]}==================")
         self.logger.info(f"==================解析meta地址是{response.meta}==================")
-        # return data_list
         for data_url in data_list:
             self.logger.info(f"{data_url}")
-            yield Request(url=data_url,headers=headers,cookies=cookies,callback=self.parse_data_list,dont_filter=True)
-        
+            yield Request(url=data_url,headers=headers,cookies=cookies,callback=self.parse_data_list,errback=self.handle_httperror)
+      
     def parse_data_list(self,response):
         """_summary_
         解析详情页
