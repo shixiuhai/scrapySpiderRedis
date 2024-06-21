@@ -167,26 +167,30 @@ class CwcwclothingspiderSpider(scrapy.Spider):
         resp=response.text
         self.logger.info(f"详情页内容是{resp[0:20]}")
         self.logger.info(f"meta内容是{response.meta}")
-        item["title"]=response.meta.get("sort_url")
+        title = re.search(r'<meta property="og:title" content="(.*?)">', resp).group().split('"')[-2]
+        price = re.search(r'<meta property="og:price:amount" content="(.*?)">', resp).group().split('"')[-2]
+        sort = response.meta["sort_url"].split("/")[-1]
+        des = re.search(r'<meta property="og:description" content="(.*?)">', resp).group().split('"')[-2]
+        size_list = []
+        size_soup = BeautifulSoup(resp, 'html.parser')
+        size_value = size_soup.find('select', class_='product-form__variants no-js', id=True)
+        size_option = size_value.find_all('option')
+        for size in size_option:
+            size_list.append(size.text)
+        img_list = []
+        img_soup = BeautifulSoup(resp, 'html.parser')
+        src_value = img_soup.find_all('img', class_='product-single__thumbnail-image', src=True)
+        for src in src_value:
+            img_list.append("https:" + src["src"])
+        t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        
+        item["title"]=title
+        item["price"]=price
+        item["sort"]=sort
+        item["create_time"]=t
+        item["detail_img"]=str(img_list)
         yield item
-        # title = re.search(r'<meta property="og:title" content="(.*?)">', resp).group().split('"')[-2]
-        # price = re.search(r'<meta property="og:price:amount" content="(.*?)">', resp).group().split('"')[-2]
-        # sort = response.meta["sort_url"].split("/")[-1]
-        # self.logger.info(f"title is {title}, price is {price}, sort is {sort}")
-        # des = re.search(r'<meta property="og:description" content="(.*?)">', resp).group().split('"')[-2]
-        # size_list = []
-        # size_soup = BeautifulSoup(resp, 'html.parser')
-        # size_value = size_soup.find('select', class_='product-form__variants no-js', id=True)
-        # size_option = size_value.find_all('option')
-        # for size in size_option:
-        #     size_list.append(size.text)
-        # img_list = []
-        # img_soup = BeautifulSoup(resp, 'html.parser')
-        # src_value = img_soup.find_all('img', class_='product-single__thumbnail-image', src=True)
-        # for src in src_value:
-        #     img_list.append("https:" + src["src"])
-        # t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        # yield item
+       
         
         
             
