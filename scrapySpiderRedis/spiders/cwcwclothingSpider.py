@@ -168,7 +168,7 @@ class CwcwclothingspiderSpider(scrapy.Spider):
             self.logger.info(f"{data_url}")
             self.logger.info(requests.get(url=data_url).status_code)
             try:
-                yield Request(url=data_url,callback=self.parse_data_list,meta={"a":1})
+                yield Request(url=data_url,callback=self.parse_data_list,meta={"a":1},dont_filter=True)
             except Exception as error:
                 self.logger.error(f"错误是:{error}")
       
