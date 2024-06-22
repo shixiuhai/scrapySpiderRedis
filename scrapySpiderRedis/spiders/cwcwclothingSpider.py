@@ -1,3 +1,8 @@
+"""_summary_
+运行该脚本需要mysql环境，配置settings.py，需要导入otherDemoCodeTest下面cwcwclothingSpider.sql文件
+Yields:
+    _type_: _description_
+"""
 from typing import Iterable
 from scrapy import Request
 from scrapySpiderRedis.items import ScrapyspiderredisItem
