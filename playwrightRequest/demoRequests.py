@@ -39,7 +39,6 @@ def selfRequests(url:str,
     result = requests.post(url=request_url,json=json).json()
     if result.get("code")==200:
         return result.get("text")
-    
 if __name__ == "__main__":
     print(selfRequests(url="https://www.xiaohongshu.com/explore/654ed925000000001b00c2bc"))
     
