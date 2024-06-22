@@ -3,3 +3,4 @@ scrapySpiderRedis\__pycache__\settings.cpython-311.pyc
 mysql-field.json
 *.db
 logs
+test.py
