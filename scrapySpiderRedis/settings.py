@@ -101,7 +101,7 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor" #  �
 FEED_EXPORT_ENCODING = "utf-8" #  确保数据以 UTF-8 格式编码。
 
 ## 数据编码和日志
-LOG_LEVEL = 'INFO' # 日志级别
+LOG_LEVEL = 'DEBUG' # 日志级别
 SAVE_LOGS = False  # 保存自定义日志到文件
 LOG_ENABLED = True # 是否开启scrapy自己的日志,Ture开启,False关闭
 
@@ -148,7 +148,7 @@ ITEM_PIPELINES = {
 
 # 下载中间件配置,配置接入三方请求,配置代理等,配置随机请求头等
 DOWNLOADER_MIDDLEWARES = {
-   "scrapySpiderRedis.middlewares.ScrapyspiderredisDownloaderMiddleware": 543,
+   "scrapyProxy.proxy.ProxyByHaiWaiMiddleware": 543,
 }
 
 # 设置代理池地址

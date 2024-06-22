@@ -8,6 +8,12 @@ class BaiduspiderSpider(scrapy.Spider):
     allowed_domains = ["baidu.com","bing.com"]
     start_urls = ["https://www.baidu.com","https://www.bing.com"]
     logger = Logging("cwcwclothingSpider.log").get_logger() # 使用自定义日志器
+    
+    # def __init__(self, *args, **kwargs):
+    #     super(BaiduspiderSpider, self).__init__(*args, **kwargs)
+    #     # 定义实例变量 logger
+    #     self.logger = Logging("baiduSpider.log").get_logger()
+
     def parse(self, response):
         self.logger.info(response.text)
         # yield scrapy.Request("https://www.baidu.com", callback=self.parse)
