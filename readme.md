@@ -10,11 +10,10 @@
 scrapy genspider cwcwclothingSpider cwcwclothing.com
 ```
 ### 配置中间件(需要配置的中间件在middlewaresDemo可以预览)
-### 实现的中间件
+#### 实现的中间件
 * 完成了IP代理中间件scrapyProxy.proxy.ProxyByHaiWaiMiddleware
 ## 其他
-### 有个弃用告警
-目录在 site-packages\scrapy_redis\dupefilter.py
+* 有个弃用告警目录在 site-packages\scrapy_redis\dupefilter.py
 ### 遇到有的安装后无法导入,可能是历史残留影响
 1. 卸载包
 pip uninstall package
