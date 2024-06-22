@@ -25,7 +25,7 @@ pip3 install package
 ## 部署scrapy
 ### 使用geray部署
 #### 安装scapyd
-* 使用pip3安装scrapyd
+* 使用pip3安装scrapyd,scrapyd的环境需要包含完整的requiremnets.txt依赖
 ```
 pip3 install scrapyd
 ```
