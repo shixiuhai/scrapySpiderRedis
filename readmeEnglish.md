@@ -7,6 +7,9 @@
 ### 4. Currently tested only on Windows, not yet tested on Linux
 ## Usage
 ### Create a new spider
+```
+scrapy genspider cwcwclothingSpider cwcwclothing.com
+```
 ### Configure Middleware (Middleware configurations can be previewed in middlewaresDemo)
 #### Implemented Middleware
 * Implemented IP proxy middleware: scrapyProxy.proxy.ProxyByHaiWaiMiddleware
