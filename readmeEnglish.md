@@ -43,8 +43,8 @@ gerapy runserver 0.0.0.0:8000 # Start Gerapy service, access at http://host:8000
 
 ```
 
-### 使用dcoker部署
-### 使用k8s部署
+### deploy with docker
+### deploy with k8s
 
 
 
