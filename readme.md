@@ -6,7 +6,12 @@
 ### 4. 暂时只做了在windows环境下运行,尚未测试linux下
 ## 使用
 ### 新建一个爬虫
- scrapy genspider cwcwclothingSpider cwcwclothing.com
+```
+scrapy genspider cwcwclothingSpider cwcwclothing.com
+```
+### 配置中间件(需要配置的中间件在middlewaresDemo可以预览)
+### 实现的中间件
+* 完成了IP代理中间件scrapyProxy.proxy.ProxyByHaiWaiMiddleware
 ## 其他
 ### 有个弃用告警
 目录在 site-packages\scrapy_redis\dupefilter.py
