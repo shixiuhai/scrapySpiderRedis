@@ -101,14 +101,14 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor" #  �
 FEED_EXPORT_ENCODING = "utf-8" #  确保数据以 UTF-8 格式编码。
 
 ## 数据编码和日志
-LOG_LEVEL = 'DEBUG' # 日志级别
+LOG_LEVEL = "DEBUG" # 日志级别
 SAVE_LOGS = False  # 保存自定义日志到文件
 LOG_ENABLED = True # 是否开启scrapy自己的日志,Ture开启,False关闭
 
 ## Redis 集成和分布式爬取设置
 DUPEFILTER_CLASS = "scrapySpiderRedis.dupefilter.CustomRFPDupeFilter" # 配置去重类为redis
 SCHEDULER = "scrapy_redis.scheduler.Scheduler" # 配置调度器为redis
-REDIS_URL = 'redis://:abc123456@127.0.0.1:6379/1' # 配置redis主机密码相关;测试环境配置redis://:abc123456@127.0.0.1:6379/1,生产环境配置redis://:abc123456@127.0.0.1:6379
+REDIS_URL = "redis://:abc123456@127.0.0.1:6379/1" # 配置redis主机密码相关;测试环境配置redis://:abc123456@127.0.0.1:6379/1,生产环境配置redis://:abc123456@127.0.0.1:6379
 SCHEDULER_PERSIST = True # 中间断层数据不会丢失，会继续重新爬取
 SCHEDULER_FLUSH_ON_START = True # False表示不重新爬取,True表示会重新爬取;测试环境配置True,生产环境配置False,
 
@@ -135,25 +135,31 @@ DOWNLOAD_DELAY = 3  # 设置每个请求之间的延时为3秒
 RANDOMIZE_DOWNLOAD_DELAY = False # 启用随机延迟 如果你设置DOWNLOAD_DELAY为3秒，并且RANDOMIZE_DOWNLOAD_DELAY为True，那么实际的下载延迟时间将在1.5秒（3 * 0.5）到4.5秒（3 * 1.5）之间随机选取。
 
 ## 数据库和中间件
-MYSQL_HOST = '192.168.6.246' # mysql数据库地址
-MYSQL_DATABASE = 'video' # mysql数据库库名
-MYSQL_USER = 'root' # mysql数据库用户铭
-MYSQL_PASSWORD = 'sxh.200008' # 数据库用户密码
+MYSQL_HOST = "192.168.6.246" # mysql数据库地址
+MYSQL_DATABASE = "video" # mysql数据库库名
+MYSQL_USER = "root" # mysql数据库用户铭
+MYSQL_PASSWORD = "sxh.200008" # 数据库用户密码
 MYSQL_PORT = 3306 # 数据库连接端口
 
 # pipeline 数据存储设置
 ITEM_PIPELINES = {
-   'scrapySpiderRedis.pipelines.MysqlPipeline': 300,
+   "scrapySpiderRedis.pipelines.MysqlPipeline": 300,
 }
 
-# 下载中间件配置,配置接入三方请求,配置代理等,配置随机请求头等
+# 下载中间件配置,配置接入三方请求,配置代理等,配置随机请求头等 
 DOWNLOADER_MIDDLEWARES = {
-   "scrapyProxy.proxy.ProxyByHaiWaiMiddleware": 543,
+   "scrapyProxy.proxy.ProxyByHaiWaiMiddleware":400,
 }
 
-# 设置代理池地址
-# PROXY_URL="http://127.0.0.1:5010/get/"
+# 爬虫中间件配置
+SPIDER_MIDDLEWARES = {
+   
+}
+
 # 设置mongoDB相关
+MONGO_URI=""
+MONGO_DB=""
+
 
 
 
