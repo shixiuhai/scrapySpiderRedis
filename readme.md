@@ -14,6 +14,8 @@ scrapy genspider cwcwclothingSpider cwcwclothing.com
 #### 实现的中间件
 * 完成了IP代理中间件scrapyProxy.proxy.ProxyByHaiWaiMiddleware
 ## 其他
+### 项目内的中文翻译成英文
+* 暂时做不动了,谁有兴趣请联系邮箱15256728901@163.com或issue
 ### 部分告警
 * 有个弃用告警目录在 site-packages\scrapy_redis\dupefilter.py
 ### 遇到有的安装后无法导入,可能是历史残留影响
