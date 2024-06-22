@@ -1,3 +1,4 @@
+[Switch to English Version](readmeEnglish.md)
 # 基于scrapy和scrapy-redis爬虫的脚手架
 ## 环境
 ### 1. python3.11.9
@@ -34,7 +35,7 @@ pip3 install scrapyd
 scrapyd
 ```
 #### 安装gerapy
-* 使用gerapy安装gerapy
+* 使用pip3安装gerapy
 ```
 pip3 install gerapy
 ```
