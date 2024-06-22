@@ -8,8 +8,15 @@ from scrapy import signals
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
 
-
 class ScrapyspiderredisSpiderMiddleware:
+    """_summary_
+    爬虫中间件demo
+    Returns:
+        _type_: _description_
+
+    Yields:
+        _type_: _description_
+    """
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -55,8 +62,12 @@ class ScrapyspiderredisSpiderMiddleware:
     def spider_opened(self, spider):
         spider.logger.info("Spider opened: %s" % spider.name)
 
-
 class ScrapyspiderredisDownloaderMiddleware:
+    """_summary_
+    下载中间件demo
+    Returns:
+        _type_: _description_
+    """
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
