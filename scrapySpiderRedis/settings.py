@@ -138,7 +138,7 @@ RANDOMIZE_DOWNLOAD_DELAY = False # 启用随机延迟 如果你设置DOWNLOAD_DE
 MYSQL_HOST = "192.168.6.246" # mysql数据库地址
 MYSQL_DATABASE = "video" # mysql数据库库名
 MYSQL_USER = "root" # mysql数据库用户铭
-MYSQL_PASSWORD = "sxh.200008" # 数据库用户密码
+MYSQL_PASSWORD = "xxxx" # 数据库用户密码
 MYSQL_PORT = 3306 # 数据库连接端口
 
 # pipeline 数据存储设置
@@ -148,7 +148,7 @@ ITEM_PIPELINES = {
 
 # 下载中间件配置,配置接入三方请求,配置代理等,配置随机请求头等 
 DOWNLOADER_MIDDLEWARES = {
-   "scrapyProxy.proxy.ProxyByHaiWaiMiddleware":400,
+
 }
 
 # 爬虫中间件配置
