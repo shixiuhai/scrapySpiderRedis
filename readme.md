@@ -1,4 +1,4 @@
-# scrapy-redis脚手架
+# 基于scrapy和scrapy-redis的脚手架
 ## 环境
 ### 1. python3.11.9
 ### 2. scrapy2.11.2
