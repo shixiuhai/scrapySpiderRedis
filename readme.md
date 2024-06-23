@@ -6,6 +6,11 @@
 ### 3. scrapy-redis0.7.3 
 ### 4. 暂时只做了在windows环境下运行,尚未测试linux下
 ## 使用
+### 开启环境
+1. 安装mysql
+2. 安装redis
+3. 导入测试sql到mysql
+4. 在settings.py里设置mysql和redis相关用户和密码
 ### 新建一个爬虫
 ```
 scrapy genspider cwcwclothingSpider cwcwclothing.com
