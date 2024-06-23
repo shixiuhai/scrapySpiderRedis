@@ -10,7 +10,7 @@ class ProxyByHaiWaiMiddleware():
     海外IP代理
     """
     def __init__(self):
-        self.logger = Logging("proxy.log").get_logger() # 使用自定义日志器
+        self.logger = Logging("scrapyProxy.log").get_logger() # 使用自定义日志器
         self.proxy_url = "http://api.haiwaidaili.net/abroad?token=2fe39c76c11314b78b0c2a5d4df5046a&num=1&format=1&protocol=http&country=&state=&city=&sep=1&csep=&type=datacenter&area=US" # 海外代理的url
 
     def get_random_proxy(self):
