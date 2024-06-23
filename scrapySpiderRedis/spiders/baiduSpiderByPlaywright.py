@@ -21,7 +21,7 @@ class baiduSpiderByPlaywright(scrapy.Spider):
         yield PlaywrightRequest(url=self.start_url,callback=self.parse)
 
     def parse(self, response):
-        self.logger.info(response.text)
+        self.logger.info(response.text[0:60])
         # yield scrapy.Request("https://www.baidu.com", callback=self.parse)
         # yield {
         #     'url': response.url,
