@@ -7,7 +7,7 @@ class BaiduspiderSpider(scrapy.Spider):
     name = "baiduSpider"
     allowed_domains = ["baidu.com","bing.com"]
     start_urls = ["https://www.baidu.com","https://www.bing.com"]
-    logger = Logging("cwcwclothingSpider.log").get_logger() # 使用自定义日志器
+    logger = Logging("baiduSpider.log").get_logger() # 使用自定义日志器
     
     # def __init__(self, *args, **kwargs):
     #     super(BaiduspiderSpider, self).__init__(*args, **kwargs)
