@@ -108,6 +108,8 @@ class PlaywrightMiddleware(object):
         :return:
         """
         playwright_meta = request.meta.get('playwright') or {}
+        if playwright_meta.get("browser_type",None) is None:
+            return None
         self.logger.debug('playwright_meta %s', playwright_meta)
         playwright_host=random.choice(GERAPY_PLAYWRIGHT_HOST_LIST) # 随机选一个节点主机
         playwright_url = "http://" + playwright_host + "/rendered_by_playwright/requests"
