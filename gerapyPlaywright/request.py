@@ -7,7 +7,8 @@ class PlaywrightRequest(Request):
     """
     
     def __init__(self, url, callback=None, wait_for=None, script=None, proxy=None,
-                 sleep=None, timeout=None, pretend=None, screenshot=None, meta=None, *args,
+                 sleep=None, timeout=None, pretend=None, screenshot=None, meta=None, 
+                 browser_type="chromium", return_type="text", *args,
                  **kwargs):
         """
         :param url: request url
@@ -36,8 +37,9 @@ class PlaywrightRequest(Request):
         self.timeout = playwright_meta.get('timeout') if playwright_meta.get('timeout') is not None else timeout
         self.screenshot = playwright_meta.get('screenshot') if playwright_meta.get(
             'screenshot') is not None else screenshot
-        
-        playwright_meta = meta.setdefault('playwright', {})
+        self.browser_type= playwright_meta.get('browser_type') if  playwright_meta.get('browser_type') is not None else browser_type
+        self.return_type = playwright_meta.get('return_type') if playwright_meta.get('return_type')  is not None else return_type
+        playwright_meta = meta.setdefault('playwright', {}) # 后边的修改会对meta生效
         playwright_meta['wait_for'] = self.wait_for
         playwright_meta['script'] = self.script
         playwright_meta['sleep'] = self.sleep
@@ -45,5 +47,7 @@ class PlaywrightRequest(Request):
         playwright_meta['pretend'] = self.pretend
         playwright_meta['timeout'] = self.timeout
         playwright_meta['screenshot'] = self.screenshot
+        playwright_meta['browser_type'] = self.browser_type
+        playwright_meta['return_type'] = self.return_type
         
         super().__init__(url, callback, meta=meta, *args, **kwargs)

@@ -1,3 +1,8 @@
+"""_summary_
+基于playwright的分布式动态渲染加入项目 https://github.com/shixiuhai/rendered-by-playwright/tree/main
+Returns:
+    _type_: _description_
+"""
 import time
 from io import BytesIO
 from scrapy.http import HtmlResponse
@@ -7,6 +12,7 @@ from gerapyPlaywright.settings import *
 import urllib.parse
 from twisted.internet.threads import deferToThread
 from scrapySpiderRedis.log import Logging
+import random
 import requests
 
 class PlaywrightMiddleware(object):
@@ -67,25 +73,25 @@ class PlaywrightMiddleware(object):
         # logging.getLogger('urllib3.connectionpool').setLevel(logging_level)
         
         # init settings
-        cls.window_width = settings.get('GERAPY_PLAYWRIGHT_WINDOW_WIDTH', GERAPY_PLAYWRIGHT_WINDOW_WIDTH)
-        cls.window_height = settings.get('GERAPY_PLAYWRIGHT_WINDOW_HEIGHT', GERAPY_PLAYWRIGHT_WINDOW_HEIGHT)
-        cls.headless = settings.get('GERAPY_PLAYWRIGHT_HEADLESS', GERAPY_PLAYWRIGHT_HEADLESS)
-        cls.ignore_https_errors = settings.get('GERAPY_PLAYWRIGHT_IGNORE_HTTPS_ERRORS',
-                                               GERAPY_PLAYWRIGHT_IGNORE_HTTPS_ERRORS)
-        cls.executable_path = settings.get('GERAPY_PLAYWRIGHT_EXECUTABLE_PATH', GERAPY_PLAYWRIGHT_EXECUTABLE_PATH)
-        cls.disable_extensions = settings.get('GERAPY_PLAYWRIGHT_DISABLE_EXTENSIONS',
-                                              GERAPY_PLAYWRIGHT_DISABLE_EXTENSIONS)
-        cls.hide_scrollbars = settings.get('GERAPY_PLAYWRIGHT_HIDE_SCROLLBARS', GERAPY_PLAYWRIGHT_HIDE_SCROLLBARS)
+        # cls.window_width = settings.get('GERAPY_PLAYWRIGHT_WINDOW_WIDTH', GERAPY_PLAYWRIGHT_WINDOW_WIDTH)
+        # cls.window_height = settings.get('GERAPY_PLAYWRIGHT_WINDOW_HEIGHT', GERAPY_PLAYWRIGHT_WINDOW_HEIGHT)
+        # cls.headless = settings.get('GERAPY_PLAYWRIGHT_HEADLESS', GERAPY_PLAYWRIGHT_HEADLESS)
+        # cls.ignore_https_errors = settings.get('GERAPY_PLAYWRIGHT_IGNORE_HTTPS_ERRORS',
+        #                                        GERAPY_PLAYWRIGHT_IGNORE_HTTPS_ERRORS)
+        # cls.executable_path = settings.get('GERAPY_PLAYWRIGHT_EXECUTABLE_PATH', GERAPY_PLAYWRIGHT_EXECUTABLE_PATH)
+        # cls.disable_extensions = settings.get('GERAPY_PLAYWRIGHT_DISABLE_EXTENSIONS',
+        #                                       GERAPY_PLAYWRIGHT_DISABLE_EXTENSIONS)
+        # cls.hide_scrollbars = settings.get('GERAPY_PLAYWRIGHT_HIDE_SCROLLBARS', GERAPY_PLAYWRIGHT_HIDE_SCROLLBARS)
         cls.mute_audio = settings.get('GERAPY_PLAYWRIGHT_MUTE_AUDIO', GERAPY_PLAYWRIGHT_MUTE_AUDIO)
-        cls.no_sandbox = settings.get('GERAPY_PLAYWRIGHT_NO_SANDBOX', GERAPY_PLAYWRIGHT_NO_SANDBOX)
-        cls.disable_setuid_sandbox = settings.get('GERAPY_PLAYWRIGHT_DISABLE_SETUID_SANDBOX',
-                                                  GERAPY_PLAYWRIGHT_DISABLE_SETUID_SANDBOX)
-        cls.disable_gpu = settings.get('GERAPY_PLAYWRIGHT_DISABLE_GPU', GERAPY_PLAYWRIGHT_DISABLE_GPU)
+        # cls.no_sandbox = settings.get('GERAPY_PLAYWRIGHT_NO_SANDBOX', GERAPY_PLAYWRIGHT_NO_SANDBOX)
+        # cls.disable_setuid_sandbox = settings.get('GERAPY_PLAYWRIGHT_DISABLE_SETUID_SANDBOX',
+        #                                           GERAPY_PLAYWRIGHT_DISABLE_SETUID_SANDBOX)
+        # cls.disable_gpu = settings.get('GERAPY_PLAYWRIGHT_DISABLE_GPU', GERAPY_PLAYWRIGHT_DISABLE_GPU)
         cls.download_timeout = settings.get('GERAPY_PLAYWRIGHT_DOWNLOAD_TIMEOUT',
                                             settings.get('DOWNLOAD_TIMEOUT', GERAPY_PLAYWRIGHT_DOWNLOAD_TIMEOUT))
         
-        cls.screenshot = settings.get('GERAPY_PLAYWRIGHT_SCREENSHOT', GERAPY_PLAYWRIGHT_SCREENSHOT)
-        cls.pretend = settings.get('GERAPY_PLAYWRIGHT_PRETEND', GERAPY_PLAYWRIGHT_PRETEND)
+        # cls.screenshot = settings.get('GERAPY_PLAYWRIGHT_SCREENSHOT', GERAPY_PLAYWRIGHT_SCREENSHOT)
+        # cls.pretend = settings.get('GERAPY_PLAYWRIGHT_PRETEND', GERAPY_PLAYWRIGHT_PRETEND)
         cls.sleep = settings.get('GERAPY_PLAYWRIGHT_SLEEP', GERAPY_PLAYWRIGHT_SLEEP)
         cls.retry_enabled = settings.getbool('RETRY_ENABLED')
         cls.max_retry_times = settings.getint('RETRY_TIMES')
@@ -101,21 +107,20 @@ class PlaywrightMiddleware(object):
         :param spider:
         :return:
         """
-        selenium_meta = request.meta.get('playwright') or {}
-        self.logger.debug('playwright_meta %s', selenium_meta)
-        playwright_host="172.17.255.227:9001"
+        playwright_meta = request.meta.get('playwright') or {}
+        self.logger.debug('playwright_meta %s', playwright_meta)
+        playwright_host=random.choice(GERAPY_PLAYWRIGHT_HOST_LIST) # 随机选一个节点主机
         playwright_url = "http://" + playwright_host + "/rendered_by_playwright/requests"
         json={
             "url": f"{request.url}",
-            "is_block_image":True,
-            "browser_type":"webkit",
-            "timeout": 10,
-            "return_type": "text"
+            "is_block_image": True,
+            "browser_type": playwright_meta["browser_type"],
+            "timeout": GERAPY_PLAYWRIGHT_DOWNLOAD_TIMEOUT,
+            "return_type": playwright_meta["return_type"]
         }
         result = requests.post(url=playwright_url,json=json).json()
         if result.get("code")==200:
             # return result.get("text")
-            
             response = HtmlResponse(
                 request.url,
                 status=200,
