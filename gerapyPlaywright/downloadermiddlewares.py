@@ -116,6 +116,7 @@ class PlaywrightMiddleware(object):
         json={
             "url": f"{request.url}",
             "is_block_image": True,
+            "is_block_audio": True,
             "browser_type": playwright_meta["browser_type"],
             "timeout": GERAPY_PLAYWRIGHT_DOWNLOAD_TIMEOUT,
             "return_type": playwright_meta["return_type"]
