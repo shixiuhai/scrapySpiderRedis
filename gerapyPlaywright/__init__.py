@@ -1,3 +1,3 @@
-# 暴露内部方法到本地
-from .downloadermiddlewares import SeleniumMiddleware
-from .request import SeleniumRequest
+# # 暴露内部方法到本路径
+from .downloadermiddlewares import PlaywrightMiddleware
+from .request import PlaywrightRequest

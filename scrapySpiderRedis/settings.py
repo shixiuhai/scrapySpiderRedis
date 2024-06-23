@@ -148,7 +148,7 @@ ITEM_PIPELINES = {
 
 # 下载中间件配置,配置接入三方请求,配置代理等,配置随机请求头等 
 DOWNLOADER_MIDDLEWARES = {
-   "gerapyPlaywright.downloadermiddlewares.PlaywrightMiddleware":401
+   "gerapyPlaywright.PlaywrightMiddleware":401
 
 }
 

@@ -4,7 +4,7 @@ from scrapy import Request
 # from scrapy_redis.spiders import RedisSpider
 from scrapySpiderRedis.items import ScrapyspiderredisItem
 from scrapySpiderRedis.log import Logging
-from gerapyPlaywright.request import PlaywrightRequest
+from gerapyPlaywright import PlaywrightRequest
 
 class baiduSpiderByPlaywright(scrapy.Spider):
     name = "baiduSpiderByPlaywright"

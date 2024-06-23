@@ -1,4 +1,4 @@
 {
     "scrapyProxy.proxy.ProxyByHaiWaiMiddleware":400, // 使用IP代理中间件,
-    "gerapyPlaywright.downloadermiddlewares.PlaywrightMiddleware":401, // 使用playWright封装的Request,请求demo看baiduSpiderByPlaywright
+    "gerapyPlaywright.PlaywrightMiddleware":401, // 使用playWright封装的Request,请求demo看baiduSpiderByPlaywright
 }
