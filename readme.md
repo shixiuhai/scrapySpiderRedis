@@ -15,6 +15,8 @@
 ```
 scrapy genspider cwcwclothingSpider cwcwclothing.com
 ```
+### 调试建议
+* 涉及列表迭代的调试先区所有列表里的0元素进行调试 比如 for item in href_list[0:1] 这种迭代，因为scrapy是多线程异步的
 ### 配置中间件(需要配置的中间件在middlewaresDemo可以预览)
 #### 实现的中间件
 * 完成了IP代理中间件scrapyProxy.proxy.ProxyByHaiWaiMiddleware
