@@ -4,8 +4,9 @@ import logging.handlers
 import os
 import colorlog
 from scrapySpiderRedis.settings import LOG_LEVEL, SAVE_LOGS
+# LOG_LEVEL, SAVE_LOGS = "WARNING",False
 class Logging:
-    def __init__(self, log_file_name, log_file_path="./logs"):
+    def __init__(self, log_file_name, log_file_path="./logs",log_level=None):
         """
         :param log_file_path:
                                     1、print(os.getcwd()) # 获取当前工作目录路径
@@ -25,6 +26,7 @@ class Logging:
         self.log_file_path = log_file_path
         self.log_file_name = log_file_name
         self.save_to_file = SAVE_LOGS
+        self.log_level = log_level
 
         if self.save_to_file:
             self._log_filename = self.get_log_filename()
@@ -36,7 +38,10 @@ class Logging:
         self.set_console_logger()
         if self.save_to_file:
             self.set_file_logger()
-        self._logger.setLevel(LOG_LEVEL)
+        if self.log_level is not None:
+            self._logger.setLevel(self.log_level)
+        else:
+            self._logger.setLevel(LOG_LEVEL)
 
     def get_log_filename(self):
         if not os.path.isdir(self.log_file_path):
@@ -70,5 +75,5 @@ class Logging:
 
 
 if __name__ == '__main__':
-    logger = Logging("scrapy.log").get_logger()
+    logger = Logging("scrapy.log",log_level="DEBUG").get_logger()
     logger.debug('test log')
