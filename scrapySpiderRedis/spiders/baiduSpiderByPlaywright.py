@@ -5,6 +5,8 @@ from scrapy import Request
 from scrapySpiderRedis.items import ScrapyspiderredisItem
 from scrapySpiderRedis.log import Logging
 from gerapyPlaywright import PlaywrightRequest
+from scrapy.http import HtmlResponse
+
 
 class baiduSpiderByPlaywright(scrapy.Spider):
     name = "baiduSpiderByPlaywright"
@@ -21,7 +23,7 @@ class baiduSpiderByPlaywright(scrapy.Spider):
         # 默认 priority=0.5 数值越高，优先级越大,范围 0 到 1
         yield PlaywrightRequest(url=self.start_url,callback=self.parse,priority=0.8)
 
-    def parse(self, response):
+    def parse(self, response:HtmlResponse):
         self.logger.info(response.text[0:60])
         # yield scrapy.Request("https://www.baidu.com", callback=self.parse)
         # yield {
