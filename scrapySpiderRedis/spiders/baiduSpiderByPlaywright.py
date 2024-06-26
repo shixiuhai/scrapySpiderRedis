@@ -18,7 +18,7 @@ class baiduSpiderByPlaywright(scrapy.Spider):
     #     # 定义实例变量 logger
     #     self.logger = Logging("baiduSpider.log").get_logger()
     def start_requests(self) -> Iterable[Request]:
-        # 默认 priority=0.5 数值越高，优先级越大,翻译 0 到 1
+        # 默认 priority=0.5 数值越高，优先级越大,范围 0 到 1
         yield PlaywrightRequest(url=self.start_url,callback=self.parse,priority=0.8)
 
     def parse(self, response):
