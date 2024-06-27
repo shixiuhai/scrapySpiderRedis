@@ -34,13 +34,7 @@ class ProxyByHaiWaiMiddleware():
             uri = 'https://{proxy}'.format(proxy=proxy)
             self.logger.debug(' 使用代理 ' + proxy)
             request.meta['proxy'] = uri
-        # if request.meta.get('retry_times'):
-    # @classmethod
-    # def from_crawler(cls, crawler):
-    #     settings = crawler.settings
-    #     return cls(proxy_url=settings.get('PROXY_URL')
-    #     )
-
+   
 class ProxyOtherMiddleware():
     """_summary_
     视频其他代理demo
