@@ -6,6 +6,8 @@
 ### 3. scrapy-redis0.7.3 
 ### 4. 暂时只做了在windows环境下运行,尚未测试linux下
 ## 使用
+### 备注
+* 项目默认清理了所有不必要配置，如果要运行demo请参考spidersDemo，将内部文件替换到scrapySpiderRedis内
 ### 开启环境
 1. 安装mysql
 2. 安装redis

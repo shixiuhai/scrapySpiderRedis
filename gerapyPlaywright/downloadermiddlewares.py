@@ -119,7 +119,8 @@ class PlaywrightMiddleware(object):
             "is_block_audio": True,
             "browser_type": playwright_meta["browser_type"],
             "timeout": GERAPY_PLAYWRIGHT_DOWNLOAD_TIMEOUT,
-            "return_type": playwright_meta["return_type"]
+            "return_type": playwright_meta["return_type"],
+             "after_page_load_delay": 3
         }
         result = requests.post(url=playwright_url,json=json).json()
         if result.get("code")==200:
@@ -133,7 +134,7 @@ class PlaywrightMiddleware(object):
             )
         # if screenshot_result:
         #     response.meta['screenshot'] = screenshot_result
-        return response
+            return response
     
     def process_request(self, request, spider):
         """

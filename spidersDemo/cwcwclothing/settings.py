@@ -135,20 +135,20 @@ DOWNLOAD_DELAY = 3  # 设置每个请求之间的延时为3秒
 RANDOMIZE_DOWNLOAD_DELAY = False # 启用随机延迟 如果你设置DOWNLOAD_DELAY为3秒，并且RANDOMIZE_DOWNLOAD_DELAY为True，那么实际的下载延迟时间将在1.5秒（3 * 0.5）到4.5秒（3 * 1.5）之间随机选取。
 
 ## 数据库和中间件
-MYSQL_HOST = "" # mysql数据库地址
-MYSQL_DATABASE = "" # mysql数据库库名
-MYSQL_USER = "" # mysql数据库用户铭
-MYSQL_PASSWORD = "" # 数据库用户密码
+MYSQL_HOST = "192.168.6.246" # mysql数据库地址
+MYSQL_DATABASE = "video" # mysql数据库库名
+MYSQL_USER = "root" # mysql数据库用户铭
+MYSQL_PASSWORD = "123456" # 数据库用户密码
 MYSQL_PORT = 3306 # 数据库连接端口
 
 # pipeline 数据存储设置
 ITEM_PIPELINES = {
-   # "scrapySpiderRedis.pipelines.MysqlPipeline": 300,
+   "scrapySpiderRedis.pipelines.MysqlPipeline": 300,
 }
 
 # 下载中间件配置,配置接入三方请求,配置代理等,配置随机请求头等 
 DOWNLOADER_MIDDLEWARES = {
-   # "gerapyPlaywright.PlaywrightMiddleware":401
+   "gerapyPlaywright.PlaywrightMiddleware":401
 
 }
 

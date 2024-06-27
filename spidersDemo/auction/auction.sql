@@ -1,0 +1,20 @@
+CREATE TABLE `auction_item` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `item_title` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `artist` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `category` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `creation_year` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `dimensions` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `estimate` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `price_sold` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `auction_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `auction_company` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `auction_session` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `auction_event` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `material` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `inscription` text COLLATE utf8mb4_bin,
+  `literature` text COLLATE utf8mb4_bin,
+  `description` text COLLATE utf8mb4_bin,
+  `img_url` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
