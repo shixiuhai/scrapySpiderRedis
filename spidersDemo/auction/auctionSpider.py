@@ -30,8 +30,8 @@ class AuctionspiderSpider(scrapy.Spider):
     def parse_artist_detail(self,response:HtmlResponse)->Iterable[Request]:
         self.logger.info(f"正在解析藏品页：{response.url}")
         item = AuctionSpiderItem()
-        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[1]/dd/text()').get() is not None:
-            item["item_title"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[1]/dd/text()').get()
+        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[1]/dd/text()').get() is not None:
+            item["item_title"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[1]/dd/text()').get()
         
         if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[2]/dd/span/text()').get() is not None:
             item["artist"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[2]/dd/span/text()').get()
