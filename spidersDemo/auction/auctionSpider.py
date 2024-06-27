@@ -30,55 +30,53 @@ class AuctionspiderSpider(scrapy.Spider):
     def parse_artist_detail(self,response:HtmlResponse)->Iterable[Request]:
         self.logger.info(f"正在解析藏品页：{response.url}")
         item = AuctionSpiderItem()
-        try:
-            if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[1]/dd/text()').get() is not None:
-                item["item_title"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[1]/dd/text()').get()
-            
-            if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[2]/dd/span/text()').get() is not None:
-                item["artist"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[2]/dd/span/text()').get()
-                                        
-            if response.xpath('//*[@id="app"]//dl/dd/a/text()').extract() is not None:
+        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[1]/dd/text()').get() is not None:
+            item["item_title"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[1]/dd/text()').get()
+        
+        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[2]/dd/span/text()').get() is not None:
+            item["artist"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[2]/dd/span/text()').get()
+                                    
+        if response.xpath('//*[@id="app"]//dl/dd/a/text()').extract() is not None:
+            if len(response.xpath('//*[@id="app"]//dl/dd/a/text()').extract()) >= 1:
                 item["category"] = response.xpath('//*[@id="app"]//dl/dd/a/text()').extract()[0].strip()
-            
-            if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[4]/dd/span/text()').get() is not None:
-                item["dimensions"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[4]/dd/span/text()').get()
-            
-            if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[5]/dd/text()').get() is not None:
-                item["estimate"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[5]/dd/text()').get()
-            
-            if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[2]/dl[1]/dd/text()').get() is not None:
-                item["auction_date"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[2]/dl[1]/dd/text()').get()
-            
-            if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[3]/dl/dd/span/text()').get() is not None:
-                item["material"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[3]/dl/dd/span/text()').get()
+        
+        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[4]/dd/span/text()').get() is not None:
+            item["dimensions"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[4]/dd/span/text()').get()
+        
+        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[5]/dd/text()').get() is not None:
+            item["estimate"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[1]/dl[5]/dd/text()').get()
+        
+        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[2]/dl[1]/dd/text()').get() is not None:
+            item["auction_date"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[2]/dl[1]/dd/text()').get()
+        
+        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[3]/dl/dd/span/text()').get() is not None:
+            item["material"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[3]/dl/dd/span/text()').get()
 
-            if response.xpath('//*[@id="app"]//dl/dd/a/text()').extract()  is not None:
+        if response.xpath('//*[@id="app"]//dl/dd/a/text()').extract()  is not None:
+            if len(response.xpath('//*[@id="app"]//dl/dd/a/text()').extract()) >= 2:
                 item["auction_company"] = response.xpath('//*[@id="app"]//dl/dd/a/text()').extract()[1].strip()
 
-            if response.xpath('//*[@id="app"]//dl/dd/a/text()').extract() is not None:
+        if response.xpath('//*[@id="app"]//dl/dd/a/text()').extract() is not None:
+            if len(response.xpath('//*[@id="app"]//dl/dd/a/text()').extract()) >= 3:
                 item["auction_session"] = response.xpath('//*[@id="app"]//dl/dd/a/text()').extract()[2].strip()
-                            #//*[@id="app"]   /div/div[5]/div[5]/div[1]/div/div/div[2]/dl[3]/dd/a
-            if response.xpath('//*[@id="app"]//dl/dd/a/text()').extract() is not None:
+                        
+        if response.xpath('//*[@id="app"]//dl/dd/a/text()').extract() is not None:
+            if len(response.xpath('//*[@id="app"]//dl/dd/a/text()').extract()) >= 4:
                 item["auction_event"] = response.xpath('//*[@id="app"]//dl/dd/a/text()').extract()[3].strip()
-            
-            if response.xpath('//*[@id="smallPic"]/@src').get() is not None: 
-                item["img_url"] = response.xpath('//*[@id="smallPic"]/@src').get()
-                
-            if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[2]/dd/span/text()').get() is not None:
-                item["inscription"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[2]/dd/span/text()').get()
-            
-            if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[3]/dd/span/text()').extract() is not None:
-                item["description"] = " ".join(response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[3]/dd/span/text()').extract())
         
-            if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[3]/dd/span/text()').extract() is not None:
-                item["literature"] = " ".join(response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[3]/dd/span/text()').extract())
+        if response.xpath('//*[@id="smallPic"]/@src').get() is not None: 
+            item["img_url"] = response.xpath('//*[@id="smallPic"]/@src').get()
+            
+        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[2]/dd/span/text()').get() is not None:
+            item["inscription"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[2]/dd/span/text()').get()
+        
+        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[3]/dd/span/text()').extract() is not None:
+            item["description"] = " ".join(response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[3]/dd/span/text()').extract())
+    
+        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[3]/dd/span/text()').extract() is not None:
+            item["literature"] = " ".join(response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div[1]/div/div[3]/dl[3]/dd/span/text()').extract())
 
-            if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[4]/dd/span/text()').get() is not None:
-                item["creation_year"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[4]/dd/span/text()').get()
-        except Exception as error:
-            self.logger.error(error)
-            return
-            
-        
+        if response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[4]/dd/span/text()').get() is not None:
+            item["creation_year"] = response.xpath('//*[@id="app"]/div/div[5]/div[5]/div[1]/div/div/div[1]/dl[4]/dd/span/text()').get()
         
         yield item
