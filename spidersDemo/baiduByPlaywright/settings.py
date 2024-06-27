@@ -143,12 +143,12 @@ MYSQL_PORT = 3306 # 数据库连接端口
 
 # pipeline 数据存储设置
 ITEM_PIPELINES = {
-   "scrapySpiderRedis.pipelines.MysqlPipeline": 300,
+   # "scrapySpiderRedis.pipelines.MysqlPipeline": 300,
 }
 
 # 下载中间件配置,配置接入三方请求,配置代理等,配置随机请求头等 
 DOWNLOADER_MIDDLEWARES = {
-   "gerapyPlaywright.PlaywrightMiddleware":401
+   # "gerapyPlaywright.PlaywrightMiddleware":401
 
 }
 
