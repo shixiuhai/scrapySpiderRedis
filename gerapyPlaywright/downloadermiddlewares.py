@@ -97,6 +97,7 @@ class PlaywrightMiddleware(object):
         cls.max_retry_times = settings.getint('RETRY_TIMES')
         cls.retry_http_codes = set(int(x) for x in settings.getlist('RETRY_HTTP_CODES'))
         cls.priority_adjust = settings.getint('RETRY_PRIORITY_ADJUST')
+        cls.after_page_load_delay = settings.getint('AFTER_PAGE_LOAD_DELAY',AFTER_PAGE_LOAD_DELAY)
         
         return cls()
     
@@ -118,9 +119,9 @@ class PlaywrightMiddleware(object):
             "is_block_image": True,
             "is_block_audio": True,
             "browser_type": playwright_meta["browser_type"],
-            "timeout": GERAPY_PLAYWRIGHT_DOWNLOAD_TIMEOUT,
+            "timeout": self.download_timeout,
             "return_type": playwright_meta["return_type"],
-             "after_page_load_delay": 3
+            "after_page_load_delay": self.after_page_load_delay
         }
         result = requests.post(url=playwright_url,json=json).json()
         if result.get("code")==200:
