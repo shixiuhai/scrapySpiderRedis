@@ -14,7 +14,7 @@ class AuctionspiderSpider(scrapy.Spider):
     logger = Logging("auctionSpider.log").get_logger() # 使用自定义日志器
 
     def start_requests(self) -> Iterable[Request]:
-        yield PlaywrightRequest(url=self.start_url,callback=self.parse_artist,meta={"page":1},browser_type="webkit")
+        yield PlaywrightRequest(url=self.start_url,callback=self.parse_artist,meta={"page":1},dont_filter=True)
         
     def parse_artist(self,response:HtmlResponse)->Iterable[Request]:
                                                 # //*[@id="app"]/div/div[7]/div[2]/dl[2]/dt/a
