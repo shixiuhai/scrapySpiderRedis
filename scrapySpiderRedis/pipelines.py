@@ -12,6 +12,8 @@
     
 import pymongo
 import pymysql
+import time
+from functools import wraps
 ## 数据写入到mongodb
 class MongoPipeline(object):
     def __init__(self, mongo_uri, mongo_db):
@@ -60,16 +62,36 @@ class MysqlPipeline():
         )
 
     def open_spider(self, spider):
-        self.db = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database, charset='utf8',
-                                  port=self.port)
-        self.cursor = self.db.cursor()
+        self.connect_to_db()
 
     def close_spider(self, spider):
         self.db.close()
 
+    def connect_to_db(self):
+        self.db = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database, charset='utf8',
+                                  port=self.port)
+        self.cursor = self.db.cursor()
+
+    def retry_on_disconnect(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            self = args[0]
+            max_retries = 5
+            for attempt in range(max_retries):
+                try:
+                    return func(*args, **kwargs)
+                except pymysql.MySQLError as e:
+                    if e.args[0] in (2006, 2013, 2014):  # MySQL server has gone away, Lost connection to MySQL server during query, Commands out of sync
+                        time.sleep(2 ** attempt)  # Exponential backoff
+                        self.connect_to_db()
+                    else:
+                        raise
+        return wrapper
+
     def clean_data(self, item: dict) -> bool:
         return True
 
+    @retry_on_disconnect
     def process_item(self, item, spider):
         try:
             if self.clean_data(item):
@@ -88,64 +110,3 @@ class MysqlPipeline():
             print(f"Error occurred: {e}")
             self.db.rollback()
         return item
-
-# class MysqlPipeline():
-#     def __init__(self, host, database, user, password, port):
-#         self.host = host
-#         self.database = database
-#         self.user = user
-#         self.password = password
-#         self.port = port
-    
-#     @classmethod
-#     def from_crawler(cls, crawler):
-#         return cls(
-#             host=crawler.settings.get('MYSQL_HOST'),
-#             database=crawler.settings.get('MYSQL_DATABASE'),
-#             user=crawler.settings.get('MYSQL_USER'),
-#             password=crawler.settings.get('MYSQL_PASSWORD'),
-#             port=crawler.settings.get('MYSQL_PORT'),
-#         )
-    
-#     def open_spider(self, spider):
-#         self.db = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database, charset='utf8',
-#                                   port=self.port)
-#         self.cursor = self.db.cursor()
-        
-    
-#     def close_spider(self, spider):
-#         self.db.close()
-        
-    
-#     # 定义一个是否满足插入条件的函数进行数据简单清洗
-#     def clean_data(slef,item:dict)->bool:
-#         return True
-    
-#     def process_item(self, item, spider):
-#         # print(item)
-#         try:
-#             if self.clean_data(item):  # Assuming clean_data is a method you've defined
-#                 sql = """
-#                     INSERT INTO {} (
-#                         link, title, sort, num, price, size, color, color_img,
-#                         intro, main_img, detail_img, sale, evaluate_num, mark,
-#                         seo_title, seo_intro, seo_key, status, create_time
-#                     ) VALUES (
-#                         %s, %s, %s, %s, %s, %s, %s, %s,
-#                         %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
-#                     )
-#                 """.format(item.table)
-#                 params = (
-#                     item.get('link'), item.get('title'), item.get('sort'), item.get('num'),
-#                     item.get('price'), item.get('size'), item.get('color'), item.get('color_img'),
-#                     item.get('intro'), item.get('main_img'), item.get('detail_img'), item.get('sale'),
-#                     item.get('evaluate_num'), item.get('mark'), item.get('seo_title'), item.get('seo_intro'),
-#                     item.get('seo_key'), item.get('status'), item.get('create_time')
-#                 )
-#                 # print(sql)
-#                 self.cursor.execute(sql, params)
-#                 self.db.commit()
-#         except Exception as e:
-#             print(f"Error occurred: {e}")
-#             self.db.rollback()
-#         return item
