@@ -5,8 +5,8 @@ from scrapy.utils.python import global_object_name
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-from gerapy_selenium.pretend import SCRIPTS as PRETEND_SCRIPTS
-from gerapy_selenium.settings import *
+from gerapySelenium.pretend import SCRIPTS as PRETEND_SCRIPTS
+from gerapySelenium.settings import *
 import urllib.parse
 from selenium import webdriver
 from selenium.webdriver import ChromeOptions
