@@ -66,7 +66,7 @@ class SeleniumMiddleware(object):
         :param crawler:
         :return:
         """
-        settings = crawler.settings
+        settings = crawler.settings # 优先scrapyRedis默认配置
         # logging_level = settings.get('GERAPY_SELENIUM_LOGGING_LEVEL', GERAPY_SELENIUM_LOGGING_LEVEL)
         # self.logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging_level)
         # logging.getLogger('urllib3.connectionpool').setLevel(logging_level)

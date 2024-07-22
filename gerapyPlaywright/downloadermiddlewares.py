@@ -67,7 +67,7 @@ class PlaywrightMiddleware(object):
         :param crawler:
         :return:
         """
-        settings = crawler.settings
+        settings = crawler.settings # 优先scrapyRedis默认配置
         # logging_level = settings.get('GERAPY_PLAYWRIGHT_LOGGING_LEVEL', GERAPY_PLAYWRIGHT_LOGGING_LEVEL)
         # logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging_level)
         # logging.getLogger('urllib3.connectionpool').setLevel(logging_level)
