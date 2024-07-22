@@ -1,5 +1,3 @@
-import logging
-
 # playwright logging level
 GERAPY_PLAYWRIGHT_LOGGING_LEVEL = "DEBUG"
 
