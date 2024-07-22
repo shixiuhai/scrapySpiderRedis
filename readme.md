@@ -21,7 +21,9 @@ scrapy genspider cwcwclothingSpider cwcwclothing.com
 * 涉及列表迭代的调试先区所有列表里的0元素进行调试 比如 for item in href_list[0:1] 这种迭代，因为scrapy是多线程异步的,调试完成后可以使用全局替换[0:1]为空
 ### 配置中间件(需要配置的中间件在middlewaresDemo可以预览)
 #### 实现的中间件
-* 完成了IP代理中间件scrapyProxy.proxy.ProxyByHaiWaiMiddleware
+* 完成了IP代理中间件scrapyProxy.ProxyByHaiWaiMiddleware(IP代理)
+* 完成了下载中间件gerapyPlaywright.PlaywrightMiddleware(playwright动态渲染)
+* 完成了下载中间件gerapySelenium.SeleniumMiddleware(selenium by chrome渲染)
 ## 其他
 ### 项目内的中文翻译成英文
 * 暂时做不动了,谁有兴趣请联系邮箱15256728901@163.com或issue

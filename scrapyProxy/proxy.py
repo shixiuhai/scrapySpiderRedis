@@ -5,7 +5,7 @@ Returns:
 """
 import requests
 from scrapySpiderRedis.log import Logging
-class ProxyByHaiWaiMiddleware():
+class ProxyByHaiWaiMiddleware(object):
     """_summary_
     海外IP代理
     """
