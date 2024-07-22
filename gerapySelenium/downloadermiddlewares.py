@@ -12,14 +12,17 @@ from selenium import webdriver
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.support import expected_conditions as EC
 from twisted.internet.threads import deferToThread
+from scrapySpiderRedis.log import Logging
+from settings import GERAPY_SELENIUM_LOGGING_LEVEL 
 
-logger = logging.getLogger('gerapy.selenium')
+# logger = logging.getLogger('gerapy.selenium')
 
 
 class SeleniumMiddleware(object):
     """
     Downloader middleware handling the requests with Selenium
     """
+    logger = Logging("gerapySelenium.log",log_level=GERAPY_SELENIUM_LOGGING_LEVEL).get_logger()
     
     def _retry(self, request, reason, spider):
         """
@@ -40,7 +43,7 @@ class SeleniumMiddleware(object):
         
         stats = spider.crawler.stats
         if retries <= retry_times:
-            logger.debug("Retrying %(request)s (failed %(retries)d times): %(reason)s",
+            self.logger.debug("Retrying %(request)s (failed %(retries)d times): %(reason)s",
                          {'request': request, 'retries': retries, 'reason': reason},
                          extra={'spider': spider})
             retryreq = request.copy()
@@ -56,7 +59,7 @@ class SeleniumMiddleware(object):
             return retryreq
         else:
             stats.inc_value('retry/max_reached')
-            logger.error("Gave up retrying %(request)s (failed %(retries)d times): %(reason)s",
+            self.logger.error("Gave up retrying %(request)s (failed %(retries)d times): %(reason)s",
                          {'request': request, 'retries': retries, 'reason': reason},
                          extra={'spider': spider})
     
@@ -136,7 +139,7 @@ class SeleniumMiddleware(object):
         
         # get selenium meta
         selenium_meta = request.meta.get('selenium') or {}
-        logger.debug('selenium_meta %s', selenium_meta)
+        self.logger.debug('selenium_meta %s', selenium_meta)
         
         # set proxy
         _proxy = request.meta.get('proxy')
@@ -189,19 +192,19 @@ class SeleniumMiddleware(object):
         if selenium_meta.get('wait_for'):
             _wait_for = selenium_meta.get('wait_for')
             try:
-                logger.debug('waiting for %s', _wait_for)
+                self.logger.debug('waiting for %s', _wait_for)
                 WebDriverWait(browser, _timeout).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, _wait_for))
                 )
             except TimeoutException:
-                logger.error('error waiting for %s of %s', _wait_for, request.url)
+                self.logger.error('error waiting for %s of %s', _wait_for, request.url)
                 browser.close()
                 return self._retry(request, 504, spider)
         
         # evaluate script
         if selenium_meta.get('script'):
             _script = selenium_meta.get('script')
-            logger.debug('evaluating %s', _script)
+            self.logger.debug('evaluating %s', _script)
             browser.execute(_script)
         
         # sleep
@@ -209,7 +212,7 @@ class SeleniumMiddleware(object):
         if selenium_meta.get('sleep') is not None:
             _sleep = selenium_meta.get('sleep')
         if _sleep is not None:
-            logger.debug('sleep for %ss', _sleep)
+            self.logger.debug('sleep for %ss', _sleep)
             time.sleep(_sleep)
         
         body = browser.page_source
@@ -220,7 +223,7 @@ class SeleniumMiddleware(object):
             _screenshot = selenium_meta.get('screenshot')
         screenshot_result = None
         if _screenshot is not None:
-            logger.debug('taking screenshot using args %s', _screenshot)
+            self.logger.debug('taking screenshot using args %s', _screenshot)
             if 'selector' in _screenshot:
                 screenshot_result = browser.find_element_by_css_selector(_screenshot['selector']).screenshot_as_png
             elif 'xpath' in _screenshot:
@@ -231,7 +234,7 @@ class SeleniumMiddleware(object):
                 screenshot_result = BytesIO(screenshot_result)
         
         # close page and browser
-        logger.debug('close selenium')
+        self.logger.debug('close selenium')
         browser.close()
         
         response = HtmlResponse(
@@ -252,7 +255,7 @@ class SeleniumMiddleware(object):
         :param spider:
         :return:
         """
-        logger.debug('processing request %s', request)
+        self.logger.debug('processing request %s', request)
         return deferToThread(self._process_request, request, spider)
         # return self._process_request(request, spider)
     

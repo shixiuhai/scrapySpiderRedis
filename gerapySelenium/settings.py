@@ -1,7 +1,7 @@
 import logging
 
 # selenium logging level
-GERAPY_SELENIUM_LOGGING_LEVEL = logging.WARNING
+GERAPY_SELENIUM_LOGGING_LEVEL = "DEBUG"
 
 # selenium timeout
 GERAPY_SELENIUM_DOWNLOAD_TIMEOUT = 30
