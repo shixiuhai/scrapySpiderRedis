@@ -13,7 +13,6 @@ from selenium.webdriver import ChromeOptions
 from selenium.webdriver.support import expected_conditions as EC
 from twisted.internet.threads import deferToThread
 from scrapySpiderRedis.log import Logging
-from settings import GERAPY_SELENIUM_LOGGING_LEVEL 
 
 class SeleniumMiddleware(object):
     """
@@ -68,9 +67,9 @@ class SeleniumMiddleware(object):
         :return:
         """
         settings = crawler.settings
-        logging_level = settings.get('GERAPY_SELENIUM_LOGGING_LEVEL', GERAPY_SELENIUM_LOGGING_LEVEL)
-        logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging_level)
-        logging.getLogger('urllib3.connectionpool').setLevel(logging_level)
+        # logging_level = settings.get('GERAPY_SELENIUM_LOGGING_LEVEL', GERAPY_SELENIUM_LOGGING_LEVEL)
+        # self.logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging_level)
+        # logging.getLogger('urllib3.connectionpool').setLevel(logging_level)
         
         # init settings
         cls.window_width = settings.get('GERAPY_SELENIUM_WINDOW_WIDTH', GERAPY_SELENIUM_WINDOW_WIDTH)
