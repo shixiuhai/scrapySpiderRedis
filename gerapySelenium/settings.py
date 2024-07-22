@@ -1,5 +1,3 @@
-import logging
-
 # selenium logging level
 GERAPY_SELENIUM_LOGGING_LEVEL = "DEBUG"
 
