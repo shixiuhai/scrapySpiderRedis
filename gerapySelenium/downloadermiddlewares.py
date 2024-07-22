@@ -15,9 +15,6 @@ from twisted.internet.threads import deferToThread
 from scrapySpiderRedis.log import Logging
 from settings import GERAPY_SELENIUM_LOGGING_LEVEL 
 
-# logger = logging.getLogger('gerapy.selenium')
-
-
 class SeleniumMiddleware(object):
     """
     Downloader middleware handling the requests with Selenium
@@ -225,9 +222,9 @@ class SeleniumMiddleware(object):
         if _screenshot is not None:
             self.logger.debug('taking screenshot using args %s', _screenshot)
             if 'selector' in _screenshot:
-                screenshot_result = browser.find_element_by_css_selector(_screenshot['selector']).screenshot_as_png
+                screenshot_result = browser.find_element(By.CSS_SELECTOR, _screenshot['selector']).screenshot_as_png()
             elif 'xpath' in _screenshot:
-                screenshot_result = browser.find_element_by_xpath(_screenshot['xpath']).screenshot_as_png
+                screenshot_result = browser.find_element(By.XPATH, _screenshot['xpath']).screenshot_as_png()
             else:
                 screenshot_result = browser.get_screenshot_as_png()
             if isinstance(screenshot_result, bytes):
