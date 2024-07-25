@@ -4,7 +4,8 @@
 ### 1. python3.11.9
 ### 2. scrapy2.11.2
 ### 3. scrapy-redis0.7.3 
-### 4. 暂时只做了在windows环境下运行,尚未测试linux下
+### 4. windows和linux测试都做了
+### 5. 欢迎大家提交修改和建议
 ## 使用
 ### 备注
 * 项目默认清理了所有不必要配置，如果要运行demo请参考spidersDemo，将内部文件替换到scrapySpiderRedis内
