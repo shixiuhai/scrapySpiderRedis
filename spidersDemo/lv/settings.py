@@ -101,7 +101,7 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor" #  �
 FEED_EXPORT_ENCODING = "utf-8" #  确保数据以 UTF-8 格式编码。
 
 ## 数据编码和日志
-LOG_LEVEL = "DEBUG" # 日志级别
+LOG_LEVEL = "INFO" # 日志级别
 SAVE_LOGS = False  # 保存自定义日志到文件
 LOG_ENABLED = True # 是否开启scrapy自己的日志,Ture开启,False关闭
 
@@ -115,11 +115,11 @@ SCHEDULER_FLUSH_ON_START = True # False表示不重新爬取,True表示会重新
 ##  爬取行为设置
 COOKIES_ENABLED = True # 是否禁用 cookies False禁用, True不禁用
 RETRY_ENABLED = True # 是否打开重试开关
-RETRY_TIMES = 2 #重试次数 
-DOWNLOAD_TIMEOUT = 15 # 请求超时配置
+RETRY_TIMES = 1 #重试次数 
+DOWNLOAD_TIMEOUT = 10 # 请求超时配置
 CONCURRENT_REQUESTS_PER_DOMAIN = 1  # 每个域名同时处理的请求数量
 CONCURRENT_REQUESTS_PER_IP = 1 # 每个IP同时处理的请求数量
-CONCURRENT_REQUESTS = 2  # 将并发请求数量设置为2，每个爬虫同时处理的请求数量
+CONCURRENT_REQUESTS = 1  # 将并发请求数量设置为2，每个爬虫同时处理的请求数量
 REACTOR_THREADPOOL_MAXSIZE = 30 # 增加Twisted IO线程池的最大量
 # CLOSESPIDER_PAGECOUNT = 10  # 当爬取页面数量达到10时自动停止爬取
 
