@@ -124,6 +124,10 @@ class SeleniumMiddleware(object):
             options.add_argument('--hide-scrollbars')
         if self.ignore_https_errors:
             options.add_argument('--ignore-certificate-errors')
+            options.add_argument("--disable-webrtc")
+            options.add_argument('--ignore-certificate-errors')
+            options.add_argument('--disable-web-security')
+            options.add_argument('--allow-running-insecure-content')
         if self.disable_extensions:
             options.add_argument('--disable-extensions')
         if self.mute_audio:
