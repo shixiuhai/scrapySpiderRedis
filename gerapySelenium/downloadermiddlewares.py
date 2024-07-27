@@ -183,13 +183,24 @@ class SeleniumMiddleware(object):
             browser.add_cookie(_cookie)
         if _cookies:
             browser.refresh()
+            
+        # sleep
+        _sleep = self.sleep
+        if selenium_meta.get('sleep') is not None:
+            _sleep = selenium_meta.get('sleep')
+        if _sleep is not None:
+            self.logger.debug('sleep for %ss', _sleep)
+            time.sleep(_sleep)
         
         # evaluate script
         if selenium_meta.get('script'):
-            _script = selenium_meta.get('script')
-            self.logger.debug('evaluating %s', _script)
-            browser.execute_script(_script)
-            
+            try:
+                _script = selenium_meta.get('script')
+                self.logger.debug('evaluating %s', _script)
+                browser.execute_script(_script)
+            except Exception as error:
+                return self._retry(request, 504, spider) # 脚本错误开启重试
+                
         # wait for dom loaded
         if selenium_meta.get('wait_for'):
             _wait_for = selenium_meta.get('wait_for')
@@ -203,13 +214,7 @@ class SeleniumMiddleware(object):
                 browser.close()
                 return self._retry(request, 504, spider)
         
-        # sleep
-        _sleep = self.sleep
-        if selenium_meta.get('sleep') is not None:
-            _sleep = selenium_meta.get('sleep')
-        if _sleep is not None:
-            self.logger.debug('sleep for %ss', _sleep)
-            time.sleep(_sleep)
+        
         
         body = browser.page_source
         
