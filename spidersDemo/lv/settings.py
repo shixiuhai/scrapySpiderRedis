@@ -119,7 +119,7 @@ RETRY_TIMES = 2 #重试次数
 DOWNLOAD_TIMEOUT = 15 # 请求超时配置
 CONCURRENT_REQUESTS_PER_DOMAIN = 1  # 每个域名同时处理的请求数量
 CONCURRENT_REQUESTS_PER_IP = 1 # 每个IP同时处理的请求数量
-CONCURRENT_REQUESTS = 100  # 每个爬虫同时处理的请求数量
+CONCURRENT_REQUESTS = 2  # 将并发请求数量设置为2，每个爬虫同时处理的请求数量
 REACTOR_THREADPOOL_MAXSIZE = 30 # 增加Twisted IO线程池的最大量
 # CLOSESPIDER_PAGECOUNT = 10  # 当爬取页面数量达到10时自动停止爬取
 
