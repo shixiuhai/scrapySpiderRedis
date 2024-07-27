@@ -9,6 +9,11 @@
 # class ScrapyspiderredisPipeline:
 #     def process_item(self, item, spider):
 #         return item
+
+import openpyxl
+from openpyxl import Workbook
+from openpyxl.utils import get_column_letter
+from scrapy.exceptions import DropItem
     
 import pymongo
 import pymysql
@@ -109,4 +114,42 @@ class MysqlPipeline():
         except Exception as e:
             print(f"Error occurred: {e}")
             self.db.rollback()
+        return item
+    
+class ExcelPipeline():
+    """_summary_
+    爬取数据下载为excel
+    """
+    def __init__(self, file_name):
+        self.file_name = file_name
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            file_name=crawler.settings.get('EXCEL_FILE_NAME', 'output.xlsx')
+        )
+
+    def open_spider(self, spider):
+        self.workbook = Workbook()
+        self.worksheet = self.workbook.active
+
+    def close_spider(self, spider):
+        self.workbook.save(self.file_name)
+
+    def clean_data(self, item: dict) -> bool:
+        # Implement your data cleaning logic here
+        return True
+
+    def process_item(self, item, spider):
+        try:
+            if self.clean_data(item):
+                if self.worksheet.max_row == 1:  # Write headers only once
+                    headers = list(item.keys())
+                    self.worksheet.append(headers)
+                
+                row = [item.get(field, '') for field in item.keys()]
+                self.worksheet.append(row)
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            raise DropItem(f"Error writing to Excel: {e}")
         return item
