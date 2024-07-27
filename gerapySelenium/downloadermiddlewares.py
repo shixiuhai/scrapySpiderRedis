@@ -184,6 +184,12 @@ class SeleniumMiddleware(object):
         if _cookies:
             browser.refresh()
         
+        # evaluate script
+        if selenium_meta.get('script'):
+            _script = selenium_meta.get('script')
+            self.logger.debug('evaluating %s', _script)
+            browser.execute_script(_script)
+            
         # wait for dom loaded
         if selenium_meta.get('wait_for'):
             _wait_for = selenium_meta.get('wait_for')
@@ -196,12 +202,6 @@ class SeleniumMiddleware(object):
                 self.logger.error('error waiting for %s of %s', _wait_for, request.url)
                 browser.close()
                 return self._retry(request, 504, spider)
-        
-        # evaluate script
-        if selenium_meta.get('script'):
-            _script = selenium_meta.get('script')
-            self.logger.debug('evaluating %s', _script)
-            browser.execute(_script)
         
         # sleep
         _sleep = self.sleep
