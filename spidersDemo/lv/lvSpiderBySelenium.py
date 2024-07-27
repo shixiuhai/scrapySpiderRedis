@@ -19,13 +19,18 @@ class lvSpiderBySelenium(scrapy.Spider):
     def start_requests(self) -> Iterable[Request]:
         for item in self.start_urls:
             for page in (1,item["page"]+1):
-                self.logger.info(item["url"].format(page))
-                yield SeleniumRequest(url=item["url"].format(page),callback=self.parse_detail_list,meta={"from_city_code":item["from_city_code"]})
+                self.logger.info(f"当前页码是"+str({item["url"].format(page)}))
+                yield SeleniumRequest(url=item["url"].format(page),callback=self.parse_detail_list,meta={"from_city_code":item["from_city_code"],"page":page},sleep=3)
 
     def parse_detail_list(self, response:HtmlResponse):
         # <div class="list_product_box js_product_item" data-track-product-id="1930186" data-track-is-recommend="false" data-track-inner-pos="5" style="position:relative"><div class="list_product_item_border"><div class="list_product_item flex flex-row"><div class="list_product_left" style="margin-right:16px"><div class="bg-gray-skeleton" style="width:100%;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);height:100%"></div><img class="list_product_pic" src="//dimg04.c-ctrip.com/images/0304u12000dshin6kE045_C_420_420.jpg" style="width:210px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)" alt="华东5市+乌镇5日4晚跟团游" title="华东5市+乌镇5日4晚跟团游" loading="lazy"><p class="list_product_tip truncate" style="max-width:150px"><span class="list_product_name">跟团游</span><i class="list_product_heng"></i><span class="list_product_place">金华出发</span></p></div><div class="list_product_right" style="flex:1;width:1%;min-height:150px"><p class="list_product_title" title="华东5市+乌镇5日4晚跟团游"><span>华东5市+乌镇5日4晚跟团游</span><img src="//pic.c-ctrip.com/VacationOnlinePic/tourpic/group_travel/list/diamond_4.png" alt="4钻" style="height: 16px; padding-left: 4px; margin-bottom: -2px;"></p><p class="list_product_subtitle" title="【携程自营·枕水江南】<限时赠>一瓶茉莉&amp;文创雪糕 升级2晚5钻&amp;宿乌镇，灵山祈福&amp;梵宫自助+4正高餐标50·品御茶宴&amp;双水乡乌镇+周庄赠景交+西湖游船+留园【纯玩无购物】南京进上海出|含大交通">【携程自营·枕水江南】&lt;限时赠&gt;一瓶茉莉&amp;文创雪糕 升级2晚5钻&amp;宿乌镇，灵山祈福&amp;梵宫自助+4正高餐标50·品御茶宴&amp;双水乡乌镇+周庄赠景交+西湖游船+留园【纯玩无购物】南京进上海出|含大交通</p><div class="list_label_box"><span class="list_label_blue" title="全程不含购物店行程（DFS、老佛爷等全球知名百货及景区景点及邮轮内等非携程商家组织的购物不包括在内），无任何购物强制消费"><span>无购物</span></span><span class="list_label_blue" title="订单一经携程旅行网以书面形式确认后均默认发团（不可抗力除外）"><span>成团保障</span></span><span class="list_label_blue" title="拿去花3期免息"><span>3期免息</span></span><span class="list_label_blue" title="线路特色"><span>宫殿</span></span><span class="list_label_blue" title="特色项目"><span>寺院祈福</span></span></div><div class="list_tiny_comment_box"><span class="list_product_score"><span>4.9</span>分</span><span class="list_product_travel">已售14019人</span><span class="list_travel_comment_separator"></span><span class="list_product_comment">4211条点评</span></div><div class="flex flex-col"><div class="absolute"><p class="list_product_retail">供应商：<span class="list_container_supplier_special"><i class="list_icon_yoyo"></i>携程自营</span></p></div><div class="flex flex-col"><div class="list_sr_price_box basefix relative"><div class="list_sr_price"><dfn>￥</dfn><strong>1276</strong>起</div><div><div class="list_pricetag_container"><span class="list_pricetag_label list_pricetag_label_first">限时促销</span><span class="list_pricetag_display"><span>已减150</span></span></div></div></div></div></div></div></div></div></div>
         detail_list = response.css('div.list_product_box.js_product_item')
+        count=0
         for detail_item in detail_list:
+            self.logger.info(f"当前页码是"+str(response.meta["page"]))
+            count=count+1
+            self.logger.info(f"当前爬取了改页面第{count}个旅游团")
+            
             # <span class="list_product_place">金华出发</span>
             # departure_place = (re.search(r'<span class="list_product_place">(.*?)</span>', detail_item.css('.list_product_place').get()).group(1)  if detail_item.css('.list_product_place').get() is not None else "").replace("出发","") # 出发地
             departure_place = (detail_item.css('.list_product_place::text').get()).replace("出发","") # 出发地
