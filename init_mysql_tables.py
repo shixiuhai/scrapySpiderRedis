@@ -1,5 +1,5 @@
 """
-初始化mysql数据库表
+初始化mysql数据库表,通过items里面的类名，自动在mysql中创建需要创建的表
 """
 import pymysql
 from scrapySpiderRedis.items import *
