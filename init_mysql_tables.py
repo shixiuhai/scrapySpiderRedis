@@ -2,7 +2,7 @@ import pymysql
 from scrapySpiderRedis.items import *
 from scrapySpiderRedis.settings import MYSQL_HOST, MYSQL_DATABASE, MYSQL_PASSWORD, MYSQL_PORT, MYSQL_USER
 import importlib
-
+import scrapy
 # 获取MySQL连接信息
 host = MYSQL_HOST
 user = MYSQL_USER
@@ -21,7 +21,7 @@ def create_or_update_mysql_table(class_name_str):
     
     # 获取 Item 类
     try:
-        item_class = getattr(module, class_name_str)
+        item_class:scrapy.Item = getattr(module, class_name_str)
     except AttributeError:
         print(f"Error: Class '{class_name_str}' not found in module '{module_name}'.")
         return
