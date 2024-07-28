@@ -56,7 +56,7 @@ class lvSpiderBySelenium(scrapy.Spider):
                 from_city_code=response.meta["from_city_code"]
                 detail_url=f"https://vacations.ctrip.com/travel/detail/p{detail_id}?city={from_city_code}&rv=1"
                 
-                yield SeleniumRequest(url=detail_url,sleep=5,pretend=True,script="document.getElementById('grp-103047-pkg-tab-每日行程').click(); document.getElementById('grp-103047-schedule-switch-1').click();", wait_for=".mult_cale_table",meta={"departure_place":departure_place,"title":title,"price":price,"detail_url":detail_url,"page":str(response.meta["page"])},callback=self.parse_detail)
+                yield SeleniumRequest(url=detail_url,sleep=5,pretend=True,script="""document.querySelector('[id*="pkg-tab-每日行程"]')?.click() || document.querySelector('[id*="schedule-switch-1"]')?.click();""", wait_for=".mult_cale_table",meta={"departure_place":departure_place,"title":title,"price":price,"detail_url":detail_url,"page":str(response.meta["page"])},callback=self.parse_detail)
             except Exception as error:
                 self.logger.error(f"解析详情列表页错误,错误原因是{error}")
                 continue
