@@ -7,7 +7,8 @@ from scrapySpiderRedis.log import Logging
 from gerapySelenium import SeleniumRequest
 from scrapy.http import HtmlResponse, Response
 import re
-
+# taskkill /f /im chrome.exe 关闭所有谷歌浏览
+# taskkill /f /im chromedriver.exe  关闭谷歌驱动
 
 class lvSpiderBySelenium(scrapy.Spider):
     name = "lvSpiderBySelenium"
