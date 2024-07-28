@@ -13,6 +13,11 @@ import re
 class lvSpiderBySelenium(scrapy.Spider):
     name = "lvSpiderBySelenium"
     allowed_domains = ["ctrip.com"]
+    # 杭州、宁波、温州、嘉兴、湖州、绍兴、金华、衢州、舟山、台州、丽水
+    # 杭州 https://vacations.ctrip.com/list/grouptravel/sc17.html?st=%E5%A2%83%E5%86%85&startcity=17&sv=%E5%A2%83%E5%86%85&p={} cityId=17 page 100
+    # 宁波 https://vacations.ctrip.com/list/grouptravel/sc375.html?st=%E5%A2%83%E5%86%85&startcity=375&sv=%E5%A2%83%E5%86%85&p={} citycode 375 page 100
+    # 温州 https://vacations.ctrip.com/list/grouptravel/sc491.html?st=%E5%A2%83%E5%86%85&startcity=491&sv=%E5%A2%83%E5%86%85&p={} code 491
+    # 嘉兴 https://vacations.ctrip.com/list/grouptravel/sc571.html?st=%E5%A2%83%E5%86%85&startcity=571&sv=%E5%A2%83%E5%86%85&p={} code 571
     start_urls = [{"url":"https://vacations.ctrip.com/list/grouptravel/sc308.html?p={}&st=%E6%B5%99%E6%B1%9F&startcity=308&sv=%E6%B5%99%E6%B1%9F","page":100,"from_city_code":308}]
     # start_url="https://www.baidu.com"
     logger = Logging("lvSpiderBySelenium.log").get_logger() # 使用自定义日志器
