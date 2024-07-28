@@ -25,6 +25,6 @@ class LvItem(scrapy.Item):
     detail_url=scrapy.Field()
     tourist_spots=scrapy.Field()
     destination_place=scrapy.Field()
-    destination1_place=scrapy.Field()
+    destination_place1=scrapy.Field()
     day_number=scrapy.Field()
     tourist_spots_number=scrapy.Field()
