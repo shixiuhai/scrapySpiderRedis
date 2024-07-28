@@ -19,7 +19,7 @@ class lvSpiderBySelenium(scrapy.Spider):
     def start_requests(self) -> Iterable[Request]:
         for item in self.start_urls:
             # 下面的range忘掉了，我真想给自己两巴掌
-            for page in range(2,item["page"]+1):
+            for page in range(3,item["page"]+1):
                 try:
                     self.logger.info(f"当前页码是"+str({item["url"].format(page)}))
                     yield SeleniumRequest(url=item["url"].format(page),callback=self.parse_detail_list,meta={"from_city_code":item["from_city_code"],"page":page},sleep=3)
@@ -50,7 +50,7 @@ class lvSpiderBySelenium(scrapy.Spider):
                 from_city_code=response.meta["from_city_code"]
                 detail_url=f"https://vacations.ctrip.com/travel/detail/p{detail_id}?city={from_city_code}&rv=1"
                 
-                yield SeleniumRequest(url=detail_url,sleep=5,pretend=True,script="document.getElementById('grp-103047-pkg-tab-每日行程').click(); document.getElementById('grp-103047-schedule-switch-1').click();", wait_for=".mult_cale_table",meta={"departure_place":departure_place,"title":title,"price":price,"detail_url":detail_url},callback=self.parse_detail)
+                yield SeleniumRequest(url=detail_url,sleep=5,pretend=True,script="document.getElementById('grp-103047-pkg-tab-每日行程').click(); document.getElementById('grp-103047-schedule-switch-1').click();", wait_for=".mult_cale_table",meta={"departure_place":departure_place,"title":title,"price":price,"detail_url":detail_url,"page":str(response.meta["page"])},callback=self.parse_detail)
             except Exception as error:
                 self.logger.error(f"解析详情列表页错误,错误原因是{error}")
                 continue
@@ -58,6 +58,7 @@ class lvSpiderBySelenium(scrapy.Spider):
         
     def parse_detail(self, response:HtmlResponse):
         try:
+            self.logger.info(f"当前页面的页面是: "+ str(response.meta["page"]))
             if response.css('.from_city::text').get().strip() if response.css('.from_city::text').get().strip() else "" !="":
                 detail_departure_place= response.css('.from_city::text').get().strip().split("：")[1].split("(")[0]
             if response.xpath('//span[@class="rich_content_view_20191129 total_price"]/em/text()').get():
