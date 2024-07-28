@@ -7,21 +7,20 @@ from scrapySpiderRedis.log import Logging
 from gerapySelenium import SeleniumRequest
 from scrapy.http import HtmlResponse, Response
 import re
-# taskkill /f /im chrome.exe 关闭所有谷歌浏览
-# taskkill /f /im chromedriver.exe  关闭谷歌驱动
+
 
 class lvSpiderBySelenium(scrapy.Spider):
     name = "lvSpiderBySelenium"
     allowed_domains = ["ctrip.com"]
+    start_urls = [{"url":"https://vacations.ctrip.com/list/grouptravel/sc17.html?st=%E5%A2%83%E5%86%85&startcity=17&sv=%E5%A2%83%E5%86%85&p={}","from_city_code":17,"page":100},{"url":"https://vacations.ctrip.com/list/grouptravel/sc375.html?st=%E5%A2%83%E5%86%85&startcity=375&sv=%E5%A2%83%E5%86%85&p={}","from_city_code":375,"page":100},{"url":"https://vacations.ctrip.com/list/grouptravel/sc491.html?st=%E5%A2%83%E5%86%85&startcity=491&sv=%E5%A2%83%E5%86%85&p={}","from_city_code":491,"page":100},{"url":"https://vacations.ctrip.com/list/grouptravel/sc571.html?st=%E5%A2%83%E5%86%85&startcity=571&sv=%E5%A2%83%E5%86%85&p={}","from_city_code":571,"page":100},{"url":"https://vacations.ctrip.com/list/grouptravel/sc308.html?p={}&st=%E6%B5%99%E6%B1%9F&startcity=308&sv=%E6%B5%99%E6%B1%9F","page":100,"from_city_code":308}]
+    # start_url="https://www.baidu.com"
+    logger = Logging("lvSpiderBySelenium.log").get_logger() # 使用自定义日志器
+
     # 杭州、宁波、温州、嘉兴、湖州、绍兴、金华、衢州、舟山、台州、丽水
     # 杭州 https://vacations.ctrip.com/list/grouptravel/sc17.html?st=%E5%A2%83%E5%86%85&startcity=17&sv=%E5%A2%83%E5%86%85&p={} cityId=17 page 100
     # 宁波 https://vacations.ctrip.com/list/grouptravel/sc375.html?st=%E5%A2%83%E5%86%85&startcity=375&sv=%E5%A2%83%E5%86%85&p={} citycode 375 page 100
     # 温州 https://vacations.ctrip.com/list/grouptravel/sc491.html?st=%E5%A2%83%E5%86%85&startcity=491&sv=%E5%A2%83%E5%86%85&p={} code 491
     # 嘉兴 https://vacations.ctrip.com/list/grouptravel/sc571.html?st=%E5%A2%83%E5%86%85&startcity=571&sv=%E5%A2%83%E5%86%85&p={} code 571
-    start_urls = [{"url":"https://vacations.ctrip.com/list/grouptravel/sc308.html?p={}&st=%E6%B5%99%E6%B1%9F&startcity=308&sv=%E6%B5%99%E6%B1%9F","page":100,"from_city_code":308}]
-    # start_url="https://www.baidu.com"
-    logger = Logging("lvSpiderBySelenium.log").get_logger() # 使用自定义日志器
-
     def start_requests(self) -> Iterable[Request]:
         for item in self.start_urls:
             # 下面的range忘掉了，我真想给自己两巴掌
@@ -42,10 +41,12 @@ class lvSpiderBySelenium(scrapy.Spider):
                 self.logger.info(f"当前爬取了改页面第{count}个旅游团")
                 
                 # <span class="list_product_place">金华出发</span>
+                # <p class="list_product_tip truncate" style="max-width:150px"><span class="list_product_name">跟团游</span><i class="list_product_heng"></i><span class="list_product_place">杭州出发</span></p>
                 # departure_place = (re.search(r'<span class="list_product_place">(.*?)</span>', detail_item.css('.list_product_place').get()).group(1)  if detail_item.css('.list_product_place').get() is not None else "").replace("出发","") # 出发地
                 departure_place = (detail_item.css('.list_product_place::text').get()).replace("出发","") # 出发地
                 
                 # <p class="list_product_title" title="华东5市+乌镇5日4晚跟团游"><span>华东5市+乌镇5日4晚跟团游</span><img src="//pic.c-ctrip.com/VacationOnlinePic/tourpic/group_travel/list/diamond_4.png" alt="4钻" style="height: 16px; padding-left: 4px; margin-bottom: -2px;"></p>
+                # title = detail_item.css('p.list_product_title > span::text').get() # 
                 title = detail_item.css('p.list_product_title span::text').getall()[-1] if len(detail_item.css('p.list_product_title span::text').getall())>0 else ""
                 
                 # <div class="list_sr_price"><dfn>￥</dfn><strong>1276</strong>起</div>
@@ -65,11 +66,12 @@ class lvSpiderBySelenium(scrapy.Spider):
     def parse_detail(self, response:HtmlResponse):
         try:
             self.logger.info(f"当前页面的页面是: "+ str(response.meta["page"]))
+            # <div class="prd_num" id="grp-103803-start-startcity">出发地：金华</div>
             if response.css('.from_city::text').get():
                 detail_departure_place = response.css('.from_city::text').get().strip().split("：")[1].split("(")[0]
             elif response.css('.prd_num::text').get():
                 detail_departure_place = response.css('.prd_num::text').get().strip().split("：")[1].split("(")[0]
-            
+                
             if response.xpath('//span[@class="rich_content_view_20191129 total_price"]/em/text()').get():
                 detail_price=response.xpath('//span[@class="rich_content_view_20191129 total_price"]/em/text()').get()
             
