@@ -65,8 +65,11 @@ class lvSpiderBySelenium(scrapy.Spider):
     def parse_detail(self, response:HtmlResponse):
         try:
             self.logger.info(f"当前页面的页面是: "+ str(response.meta["page"]))
-            if response.css('.from_city::text').get().strip() if response.css('.from_city::text').get().strip() else "" !="":
-                detail_departure_place= response.css('.from_city::text').get().strip().split("：")[1].split("(")[0]
+            if response.css('.from_city::text').get():
+                detail_departure_place = response.css('.from_city::text').get().strip().split("：")[1].split("(")[0]
+            elif response.css('.prd_num::text').get():
+                detail_departure_place = response.css('.prd_num::text').get().strip().split("：")[1].split("(")[0]
+            
             if response.xpath('//span[@class="rich_content_view_20191129 total_price"]/em/text()').get():
                 detail_price=response.xpath('//span[@class="rich_content_view_20191129 total_price"]/em/text()').get()
             
