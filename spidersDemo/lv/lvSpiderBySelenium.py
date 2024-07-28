@@ -46,7 +46,7 @@ class lvSpiderBySelenium(scrapy.Spider):
                 departure_place = (detail_item.css('.list_product_place::text').get()).replace("出发","") # 出发地
                 
                 # <p class="list_product_title" title="华东5市+乌镇5日4晚跟团游"><span>华东5市+乌镇5日4晚跟团游</span><img src="//pic.c-ctrip.com/VacationOnlinePic/tourpic/group_travel/list/diamond_4.png" alt="4钻" style="height: 16px; padding-left: 4px; margin-bottom: -2px;"></p>
-                title = detail_item.css('p.list_product_title > span::text').get() # 
+                title = detail_item.css('p.list_product_title span::text').getall()[-1] if len(detail_item.css('p.list_product_title span::text').getall())>0 else ""
                 
                 # <div class="list_sr_price"><dfn>￥</dfn><strong>1276</strong>起</div>
                 price = detail_item.css('div.list_sr_price strong::text').get().strip() if detail_item.css('div.list_sr_price strong::text').get() is not None else ""
