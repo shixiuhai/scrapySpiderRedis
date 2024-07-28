@@ -125,9 +125,6 @@ class SeleniumMiddleware(object):
         if self.ignore_https_errors:
             options.add_argument('--ignore-certificate-errors')
             options.add_argument("--disable-webrtc")
-            options.add_argument('--ignore-certificate-errors')
-            options.add_argument('--disable-web-security')
-            options.add_argument('--allow-running-insecure-content')
         if self.disable_extensions:
             options.add_argument('--disable-extensions')
         if self.mute_audio:
@@ -203,6 +200,8 @@ class SeleniumMiddleware(object):
                 self.logger.debug('evaluating %s', _script)
                 browser.execute_script(_script)
             except Exception as error:
+                self.logger.error(f"执行js脚本出现错误,错误原因是{error}")
+                browser.close()
                 return self._retry(request, 504, spider) # 脚本错误开启重试
                 
         # wait for dom loaded
