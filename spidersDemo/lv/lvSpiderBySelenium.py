@@ -92,7 +92,8 @@ class lvSpiderBySelenium(scrapy.Spider):
             item["tourist_spots"]=",".join(tourist_spots)
             item["destination_place"]= meta["title"].split("+")[0] if meta["title"] != "" else ""
             item["destination_place1"]=destination_place1
-            item["day_number"]=re.search(r'\d+日\d+晚', meta["title"]).group(0) if re.search(r'\d+日\d+晚', meta["title"]) else re.search(r'\d+日', meta["title"]).group(0) if re.search(r'\d+日', meta["title"]) else ""
+            item["day_number"] = re.search(r'(\d+)日',  meta["title"]).group(1) if re.search(r'(\d+)日', meta["title"]) else ""
+            # item["day_number"]=re.search(r'\d+日\d+晚', meta["title"]).group(0) if re.search(r'\d+日\d+晚', meta["title"]) else re.search(r'\d+日', meta["title"]).group(0) if re.search(r'\d+日', meta["title"]) else ""
             item["tourist_spots_number"]=len(tourist_spots)
             yield item
         except Exception as error:
