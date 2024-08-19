@@ -33,6 +33,7 @@ scrapy genspider cwcwclothingSpider cwcwclothing.com
 ### 部分告警
 * 有个弃用告警目录在 site-packages\scrapy_redis\dupefilter.py
 * 在使用selenium渲染的时候记得把settings.py里CONCURRENT_REQUESTS=2设置小些,CONCURRENT_REQUESTS表示请求并非数量
+* yield 的函数里面一般是retrun
 ### 遇到有的安装后无法导入,可能是历史残留影响
 1. 卸载包
 pip uninstall package
