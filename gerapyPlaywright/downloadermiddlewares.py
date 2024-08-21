@@ -133,9 +133,10 @@ class PlaywrightMiddleware(object):
                 encoding='utf-8',
                 request=request
             )
-        # if screenshot_result:
-        #     response.meta['screenshot'] = screenshot_result
             return response
+        else:
+            self.logger.error('error waiting for %s', request.url)   
+            return self._retry(request, 504, spider)
     
     def process_request(self, request, spider):
         """
