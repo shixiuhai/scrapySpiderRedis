@@ -21,6 +21,9 @@ scrapy genspider cwcwclothingSpider cwcwclothing.com
 ### 调试建议
 * 涉及列表迭代的调试先区所有列表里的0元素进行调试 比如 for item in href_list[0:1] 这种迭代，因为scrapy是多线程异步的,调试完成后可以使用全局替换[0:1]为空
 * 可以将并发请求设置为 CONCURRENT_REQUESTS=1
+* yield 迭代的使用一般是 Request 回调函数里，
+yield func ，func里面一般retrn就行，func里面可以返回多个item，在外边循环 yiled item就行
+
 ### 配置中间件(需要配置的中间件在middlewaresDemo可以预览)
 #### 实现的中间件
 * 完成了IP代理中间件scrapyProxy.ProxyByHaiWaiMiddleware(IP代理)
