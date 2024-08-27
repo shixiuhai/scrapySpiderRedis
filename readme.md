@@ -9,6 +9,7 @@
 ## 使用
 ### 备注
 * 项目默认清理了所有不必要配置，如果要运行demo请参考spidersDemo，将内部文件替换到scrapySpiderRedis内
+* 不同配置文件的切换通过settings里的env参数配置，默认是dev环境，dev环境的配置在settings_dev.py里，prod环境的配置在settings_prod.py里
 ### 开启环境
 1. 安装mysql
 2. 安装redis
