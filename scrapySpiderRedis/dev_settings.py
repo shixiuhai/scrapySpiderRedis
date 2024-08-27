@@ -105,7 +105,7 @@ LOG_LEVEL = "DEBUG" # 日志级别
 SAVE_LOGS = False  # 保存自定义日志到文件
 LOG_ENABLED = True # 是否开启scrapy自己的日志,Ture开启,False关闭
 
-## Redis 集成和分布式爬取设置
+## Redis 集成和分布式爬取设置, 如果不需要使用redis, 注释DUPEFILTER_CLASS到SCHEDULER_FLUSH_ON_START
 DUPEFILTER_CLASS = "scrapySpiderRedis.dupefilter.CustomRFPDupeFilter" # 配置去重类为redis
 SCHEDULER = "scrapy_redis.scheduler.Scheduler" # 配置调度器为redis
 REDIS_URL = "redis://:abc123456@127.0.0.1:6379/1" # 配置redis主机密码相关;测试环境配置redis://:abc123456@127.0.0.1:6379/1,生产环境配置redis://:abc123456@127.0.0.1:6379
