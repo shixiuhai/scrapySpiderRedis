@@ -11,8 +11,11 @@ import urllib.parse
 from selenium import webdriver
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.support import expected_conditions as EC
+import os
+import platform
 from twisted.internet.threads import deferToThread
 from scrapySpiderRedis.log import Logging
+from selenium.webdriver.chrome.service import Service as ChromeService
 
 class SeleniumMiddleware(object):
     """
@@ -108,6 +111,11 @@ class SeleniumMiddleware(object):
         """
         kwargs = {}
         options = ChromeOptions()
+        # 指定 Google Chrome 浏览器的可执行文件路径
+        options.binary_location = GERAPY_SELENIUM_BINARY_LOCATION  # 指定chrome二进制文件路径
+        if GERAPY_SELENIUM_BLOCK_IMAGE:
+            prefs = {"profile.managed_default_content_settings.images": 2}
+            options.add_experimental_option("prefs", prefs)
         kwargs['options'] = options
         if self.headless:
             options.add_argument('--headless')
@@ -138,6 +146,10 @@ class SeleniumMiddleware(object):
         selenium_meta = request.meta.get('selenium') or {}
         self.logger.debug('selenium_meta %s', selenium_meta)
         
+        # 设置用户目录
+        user_data_dir = r"D:\selenium_user_data"  # 替换为你的实际用户目录路径
+        # options.add_argument(f"--user-data-dir={user_data_dir}")s
+        
         # set proxy
         _proxy = request.meta.get('proxy')
         if selenium_meta.get('proxy') is not None:
@@ -145,7 +157,8 @@ class SeleniumMiddleware(object):
         if _proxy:
             options.add_argument('--proxy-server=' + _proxy)
         
-        browser = webdriver.Chrome(**kwargs)
+        # browser = webdriver.Chrome(**kwargs)
+        browser = webdriver.Chrome(service=ChromeService(GERAPY_SELENIUM_EXECUTABLE_PATH),options=options)
         browser.set_window_size(self.window_width, self.window_height)
         
         # pretend as normal browser
