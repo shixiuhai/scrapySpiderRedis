@@ -41,7 +41,7 @@ class MongoPipeline(object):
             name = item.collection
             self.db[name].insert_one(dict(item))  # 插入单个文档
         except Exception as e:
-            spider.log(f"Error inserting item into MongoDB: {e}")
+            spider.logger.info(f"Error inserting item into MongoDB: {e}")
         return item
     
     def close_spider(self, spider):
@@ -112,7 +112,7 @@ class MysqlPipeline():
                 self.cursor.execute(sql, params)
                 self.db.commit()
         except Exception as e:
-            print(f"Error occurred: {e}")
+            spider.logger.info(f"Error occurred: {e}")
             self.db.rollback()
         return item
     
@@ -150,6 +150,6 @@ class ExcelPipeline():
                 row = [item.get(field, '') for field in item.keys()]
                 self.worksheet.append(row)
         except Exception as e:
-            print(f"Error occurred: {e}")
+            spider.logger.info(f"Error occurred: {e}")
             raise DropItem(f"Error writing to Excel: {e}")
         return item
